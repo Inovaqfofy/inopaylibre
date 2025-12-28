@@ -1,0 +1,117 @@
+version: '3.8'
+
+# ═══════════════════════════════════════════════════════════════
+# inopay - Stack de Production Souveraine
+# Généré par InoPay Liberation Pack v4.0
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  # ─────────────────────────────────────────────────────────────
+  # FRONTEND - Application React avec Caddy (auto-SSL)
+  # ─────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: inopay-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN:-localhost}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost/api}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      backend:
+        condition: service_healthy
+
+
+
+  # ─────────────────────────────────────────────────────────────
+  # BACKEND - API Express.js (converti depuis Edge Functions)
+  # ─────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: inopay-backend
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CORS_ORIGIN=${DOMAIN:-*}
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      - JWT_SECRET=${JWT_SECRET}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ENCRYPTION_MASTER_KEY=${ENCRYPTION_MASTER_KEY}
+      - LOVABLE_API_KEY=${LOVABLE_API_KEY}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+
+
+
+
+  # ─────────────────────────────────────────────────────────────
+  # WATCHTOWER - Mise à jour automatique des containers
+  # ─────────────────────────────────────────────────────────────
+  watchtower:
+    image: containrrr/watchtower
+    container_name: inopay-watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=86400  # Vérifie toutes les 24h
+      - WATCHTOWER_INCLUDE_STOPPED=false
+    networks:
+      - app-network
+
+# ═══════════════════════════════════════════════════════════════
+# VOLUMES PERSISTANTS
+# ═══════════════════════════════════════════════════════════════
+volumes:
+  caddy_data:
+  caddy_config:
+
+
+# ═══════════════════════════════════════════════════════════════
+# RÉSEAU
+# ═══════════════════════════════════════════════════════════════
+networks:
+  app-network:
+    driver: bridge
