@@ -242,6 +242,7 @@ interface CleaningStats {
                   <p className="text-sm text-muted-foreground">
                     Schéma SQL + migrations
                   </p>
+                <CardContent>
                 </CardContent>
               </Card>
               <Card className="bg-gradient-to-br from-orange-500/10 to-transparent border-orange-500/20">
