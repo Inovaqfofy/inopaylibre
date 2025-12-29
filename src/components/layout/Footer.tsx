@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Github, Twitter, Mail, Phone, MapPin, Clock, ArrowRight, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import inopayLogo from "@/assets/inopay-logo.png";
+//import inopayLogo from "@/assets/inopay-logo.png";
 import { useState } from "react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
