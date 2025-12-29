@@ -69,7 +69,7 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
       complexity: "medium",
       configTemplate: "OLLAMA_BASE_URL=http://ollama:11434",
       codeReplacement: {
-        from: ["// INOPAY: OpenAI remplacé par Ollama (auto-hébergé)
+        from: ["// INOPAY: OpenAI remplacé par Ollama (auto-hébergé)"]
 const OLLAMA_BASE_URL = import.meta.env.VITE_OLLAMA_URL || 'http://localhost:11434';
 
 async function createChatCompletion(messages: Array<{role: string; content: string}>, model = 'llama3.1') {
