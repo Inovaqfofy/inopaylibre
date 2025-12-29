@@ -10,12 +10,13 @@ import ROICalculator from "@/components/landing/ROICalculator";
 import { useTranslation } from "react-i18next";
 import FofyChat from "@/components/FofyChat";
 
-// Import platform logos
-import lovableLogo from "@/assets/platforms/lovable-logo.png";
-import boltLogo from "@/assets/platforms/bolt-logo.png";
-import v0Logo from "@/assets/platforms/v0-logo.jpg";
-import cursorLogo from "@/assets/platforms/cursor-logo.jpg";
-import replitLogo from "@/assets/platforms/replit-logo.png";
+// Remplacement des imports d'images manquantes par des constantes vides ou des strings
+// Cela évite l'erreur ENOENT lors du build Vite
+const lovableLogo = "";
+const boltLogo = "";
+const v0Logo = "";
+const cursorLogo = "";
+const replitLogo = "";
 
 const Index = () => {
   const { user } = useAuth();
