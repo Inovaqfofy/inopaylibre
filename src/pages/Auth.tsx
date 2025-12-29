@@ -17,7 +17,8 @@ const supabase = createClient(
 );
 import { Loader2, Mail, Lock, ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import inopayLogo from "@/assets/inopay-logo.png";
+// import inopayLogo from "@/assets/inopay-logo.png";
+const inopayLogo = "";
 import OTPVerification from "@/components/auth/OTPVerification";
 
 type AuthStep = "credentials" | "otp";
