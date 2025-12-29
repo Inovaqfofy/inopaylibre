@@ -3,40 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Users, 
-  FileText, 
   Loader2,
   BarChart3,
   LogOut,
   Home,
-  FlaskConical,
-  CreditCard,
-  Settings,
-  TrendingUp,
-  ShoppingCart,
   Briefcase,
   Wrench,
-  LayoutDashboard
+  LayoutDashboard,
+  Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { RoleIndicator } from "@/components/ui/role-indicator";
-import AdminUsersList from "@/components/admin/AdminUsersList";
 import AdminExportsList from "@/components/admin/AdminExportsList";
 import AdminStats from "@/components/admin/AdminStats";
-import AdminTesters from "@/components/admin/AdminTesters";
-import AdminPayments from "@/components/admin/AdminPayments";
-import AdminSubscriptions from "@/components/admin/AdminSubscriptions";
 import AdminSettings from "@/components/admin/AdminSettings";
-import AdminKPIs from "@/components/admin/AdminKPIs";
-import AdminPurchases from "@/components/admin/AdminPurchases";
-import AdminUpsellStats from "@/components/admin/AdminUpsellStats";
 import { AdminBusinessHub } from "@/components/admin/AdminBusinessHub";
 import { AdminUsersHub } from "@/components/admin/AdminUsersHub";
 import { MobileSidebar } from "@/components/dashboard/MobileSidebar";
 import { DashboardShell, DashboardHeader, ModernSidebar } from "@/components/dashboard/shared";
-import inopayLogo from "@/assets/inopay-logo-admin.png";
 
 type AdminTab = "overview" | "business" | "users" | "tools";
 
@@ -79,10 +66,12 @@ const AdminDashboard = () => {
     { id: "overview", label: "Vue d'ensemble", icon: LayoutDashboard, section: "main" },
     { id: "business", label: "Business", icon: Briefcase, section: "main" },
     { id: "users", label: "Utilisateurs", icon: Users, section: "main" },
-    { id: "tools", label: "Outils", icon: Wrench, section: "main" }];
+    { id: "tools", label: "Outils", icon: Wrench, section: "main" }
+  ];
 
   const sections = [
-    { id: "main", label: "Navigation" }];
+    { id: "main", label: "Navigation" }
+  ];
 
   const getPageInfo = () => {
     switch (activeTab) {
@@ -117,14 +106,25 @@ const AdminDashboard = () => {
 
   const pageInfo = getPageInfo();
 
+  // Composant Logo de remplacement (évite l'erreur de fichier manquant)
+  const AdminLogo = ({ className = "h-8" }: { className?: string }) => (
+    <div className={`flex items-center gap-2 ${className}`}>
+      <div className="bg-primary/10 p-1.5 rounded-lg">
+        <Shield className="h-6 w-6 text-primary" />
+      </div>
+      <span className="font-bold text-xl tracking-tight hidden sm:inline-block">
+        Ino<span className="text-primary">Pay</span>
+      </span>
+    </div>
+  );
+
   const sidebar = (
     <>
-      {/* Mobile Sidebar */}
       <MobileSidebar
         menuItems={menuItems}
         activeTab={activeTab}
         onTabChange={(tab) => setActiveTab(tab as AdminTab)}
-        logo={<img src={inopayLogo} alt="Inopay" className="h-10 object-contain" />}
+        logo={<AdminLogo className="h-10" />}
         planBadge={
           <Badge className="bg-primary/20 text-primary-foreground border-primary/30">
             Administration
@@ -152,9 +152,8 @@ const AdminDashboard = () => {
         }
       />
 
-      {/* Desktop Sidebar */}
       <ModernSidebar
-        logo={<img src={inopayLogo} alt="Inopay" className="h-12 object-contain" />}
+        logo={<AdminLogo className="h-12" />}
         planBadge={<RoleIndicator role="admin" size="md" />}
         menuItems={menuItems}
         sections={sections}
