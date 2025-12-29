@@ -7,7 +7,7 @@ import { RoleIndicator } from "@/components/ui/role-indicator";
 import { LogOut, User, Menu, X, Settings, Crown, Shield, Phone, Clock, MapPin, Mail, ArrowDownRight, AlertTriangle } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import inopayLogo from "@/assets/inopay-logo.png";
+//import inopayLogo from "@/assets/inopay-logo.png";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
