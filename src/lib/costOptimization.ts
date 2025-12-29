@@ -41,7 +41,6 @@ export interface CostAnalysisResult {
   savingsScore: number; // 0-100
 }
 
-// Base de connaissances complète des services coûteux
 export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
   // =========== AI / LLM ===========
   {
@@ -69,9 +68,9 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
       complexity: "medium",
       configTemplate: "OLLAMA_BASE_URL=http://ollama:11434",
       codeReplacement: {
-        from: ["new OpenAI({", "openai.chat.completions.create", "gpt-3", "gpt-4"],
-        to: "Ollama HTTP API (Fetch)",
-        instructions: "Remplacer le SDK OpenAI par un fetch() sur http://localhost:11434/api/chat"
+        from: ["new OpenAI({", "openai.chat.completions.create"],
+        to: "Ollama HTTP API",
+        instructions: "Remplacer les appels OpenAI par des requêtes HTTP vers Ollama (/api/chat)"
       }
     }
   },
@@ -96,7 +95,7 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
       - ollama_data:/root/.ollama`,
       selfHostedCost: 0,
       complexity: "medium",
-      configTemplate: "OLLAMA_BASE_URL=http://ollama:11434\nOLLAMA_MODEL=llama3.1:70b",
+      configTemplate: "OLLAMA_BASE_URL=http://ollama:11434\nOLLAMA_MODEL=llama3.1",
       codeReplacement: {
         from: ["@anthropic-ai/sdk", "Anthropic(", "anthropic.messages.create"],
         to: "Ollama HTTP API",
@@ -104,7 +103,6 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
       }
     }
   },
-
   // =========== Vector DB ===========
   {
     id: "pinecone",
@@ -113,7 +111,7 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
     patterns: ["pinecone", "@pinecone-database/pinecone", "pinecone-client"],
     envPatterns: ["PINECONE_API_KEY", "PINECONE_ENVIRONMENT", "PINECONE_INDEX"],
     averageMonthlyCost: 70,
-    description: "Base de données vectorielle cloud pour embeddings IA",
+    description: "Base de données vectorielle cloud",
     alternative: {
       name: "PGVector (PostgreSQL)",
       dockerImage: "ankane/pgvector:latest",
@@ -133,75 +131,255 @@ export const COSTLY_SERVICES: CostlyServiceDefinition[] = [
       complexity: "low",
       configTemplate: "VECTOR_DATABASE_URL=postgresql://vectordb:vectordb_secret@postgres-vector:5432/vectors",
       codeReplacement: {
-        from: ["@pinecone-database/pinecone", "PineconeClient", "pinecone.upsert", "pinecone.query"],
+        from: ["@pinecone-database/pinecone", "PineconeClient"],
         to: "pg avec extension pgvector",
-        instructions: "Utiliser PostgreSQL avec l'extension pgvector pour les recherches de similarité vectorielle"
+        instructions: "Utiliser PostgreSQL avec l'extension pgvector"
       }
     }
   },
-  {
-    id: "weaviate",
-    name: "Weaviate Cloud",
-    category: "vectordb",
-    patterns: ["weaviate", "weaviate-ts-client", "weaviate-client"],
-    envPatterns: ["WEAVIATE_API_KEY", "WEAVIATE_URL"],
-    averageMonthlyCost: 60,
-    description: "Base de données vectorielle Weaviate cloud",
-    alternative: {
-      name: "Weaviate Self-hosted",
-      dockerImage: "semitechnologies/weaviate:latest",
-      dockerComposeSnippet: `  weaviate:
-    image: semitechnologies/weaviate:latest
-    container_name: weaviate
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    environment:
-      - QUERY_DEFAULTS_LIMIT=25
-      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true
-      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
-    volumes:
-      - weaviate_data:/var/lib/weaviate`,
-      selfHostedCost: 0,
-      complexity: "medium",
-      configTemplate: "WEAVIATE_URL=http://weaviate:8080",
-      codeReplacement: {
-        from: ["weaviate-ts-client"],
-        to: "Weaviate self-hosted",
-        instructions: "Pointer vers votre instance Weaviate self-hosted au lieu du cloud"
-      }
-    }
-  },
-
   // =========== Auth ===========
   {
     id: "clerk",
     name: "Clerk",
     category: "auth",
-    patterns: ["@clerk/", "clerk-sdk", "clerk.dev", "@clerk/nextjs", "@clerk/react"],
-    envPatterns: ["CLERK_SECRET_KEY", "CLERK_PUBLISHABLE_KEY", "NEXT_PUBLIC_CLERK"],
+    patterns: ["@clerk/", "clerk-sdk", "@clerk/nextjs"],
+    envPatterns: ["CLERK_SECRET_KEY", "CLERK_PUBLISHABLE_KEY"],
     averageMonthlyCost: 25,
-    description: "Service d'authentification SaaS complet",
+    description: "Service d'authentification SaaS",
     alternative: {
       name: "Supabase Auth (Self-hosted)",
       dockerImage: "supabase/gotrue:latest",
       dockerComposeSnippet: `  auth:
-    image: supabase/gotrue:v2.132.3
+    image: supabase/gotrue:latest
     container_name: supabase-auth
-    restart: unless-stopped
     ports:
       - "9999:9999"
     environment:
-      - GOTRUE_API_HOST=0.0.0.0
-      - GOTRUE_API_PORT=9999
       - GOTRUE_DB_DRIVER=postgres
-      - DATABASE_URL=postgres://supabase:secret@db:5432/supabase
-      - GOTRUE_SITE_URL=http://localhost:3000
-      - GOTRUE_JWT_SECRET=your-super-secret-jwt-token`,
+      - DATABASE_URL=postgres://supabase:secret@db:5432/supabase`,
       selfHostedCost: 0,
       complexity: "medium",
-      configTemplate: "SUPABASE_AUTH_URL=http://auth:9999\nSUPABASE_JWT_SECRET=your-super-secret",
+      configTemplate: "SUPABASE_AUTH_URL=http://auth:9999",
       codeReplacement: {
-        from: ["@clerk/react", "@clerk/nextjs", "useUser", "SignIn", "SignUp", "ClerkProvider"],
+        from: ["@clerk/react", "ClerkProvider", "useUser"],
         to: "@supabase/supabase-js",
-        instructions
+        instructions: "Remplacer Clerk par Supabase Auth"
+      }
+    }
+  },
+  // =========== Search ===========
+  {
+    id: "algolia",
+    name: "Algolia",
+    category: "search",
+    patterns: ["algoliasearch", "@algolia/"],
+    envPatterns: ["ALGOLIA_API_KEY", "ALGOLIA_APP_ID"],
+    averageMonthlyCost: 35,
+    description: "Recherche full-text cloud",
+    alternative: {
+      name: "Meilisearch",
+      dockerImage: "getmeili/meilisearch:latest",
+      dockerComposeSnippet: `  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: meilisearch
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=your-master-key`,
+      selfHostedCost: 0,
+      complexity: "low",
+      configTemplate: "MEILISEARCH_URL=http://meilisearch:7700",
+      codeReplacement: {
+        from: ["algoliasearch", "index.search"],
+        to: "meilisearch client",
+        instructions: "Remplacer Algolia par Meilisearch"
+      }
+    }
+  },
+  // =========== Realtime ===========
+  {
+    id: "pusher",
+    name: "Pusher",
+    category: "realtime",
+    patterns: ["pusher-js", "pusher"],
+    envPatterns: ["PUSHER_APP_KEY", "PUSHER_APP_SECRET"],
+    averageMonthlyCost: 49,
+    description: "WebSockets temps réel",
+    alternative: {
+      name: "Soketi",
+      dockerImage: "quay.io/soketi/soketi:1.6-16-debian",
+      dockerComposeSnippet: `  soketi:
+    image: quay.io/soketi/soketi:1.6-16-debian
+    ports:
+      - "6001:6001"
+    environment:
+      - SOKETI_DEFAULT_APP_ID=app-id`,
+      selfHostedCost: 0,
+      complexity: "low",
+      configTemplate: "PUSHER_HOST=soketi\nPUSHER_PORT=6001",
+      codeReplacement: {
+        from: ["pusher-js", "Pusher({"],
+        to: "Soketi",
+        instructions: "Soketi est compatible avec le SDK Pusher"
+      }
+    }
+  },
+  // =========== Email ===========
+  {
+    id: "resend",
+    name: "Resend",
+    category: "email",
+    patterns: ["resend", "@resend/"],
+    envPatterns: ["RESEND_API_KEY"],
+    averageMonthlyCost: 20,
+    description: "API d'envoi d'emails",
+    alternative: {
+      name: "Mailpit + SMTP",
+      dockerImage: "axllent/mailpit:latest",
+      dockerComposeSnippet: `  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"`,
+      selfHostedCost: 0,
+      complexity: "low",
+      configTemplate: "SMTP_HOST=mailpit\nSMTP_PORT=1025",
+      codeReplacement: {
+        from: ["resend.emails.send"],
+        to: "nodemailer",
+        instructions: "Utiliser nodemailer avec SMTP"
+      }
+    }
+  },
+  // =========== Storage ===========
+  {
+    id: "cloudinary",
+    name: "Cloudinary",
+    category: "storage",
+    patterns: ["cloudinary", "@cloudinary/"],
+    envPatterns: ["CLOUDINARY_URL"],
+    averageMonthlyCost: 45,
+    description: "Gestion d'images cloud",
+    alternative: {
+      name: "MinIO",
+      dockerImage: "minio/minio:latest",
+      dockerComposeSnippet: `  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+    volumes:
+      - minio_data:/data`,
+      selfHostedCost: 0,
+      complexity: "medium",
+      configTemplate: "S3_ENDPOINT=http://minio:9000",
+      codeReplacement: {
+        from: ["cloudinary.uploader.upload"],
+        to: "AWS S3 SDK (MinIO)",
+        instructions: "Utiliser le SDK S3 pointant vers MinIO"
+      }
+    }
+  },
+  // =========== Database ===========
+  {
+    id: "neon",
+    name: "Neon",
+    category: "database",
+    patterns: ["@neondatabase/serverless"],
+    envPatterns: ["NEON_DATABASE_URL", "DATABASE_URL"],
+    averageMonthlyCost: 19,
+    description: "PostgreSQL serverless",
+    alternative: {
+      name: "PostgreSQL Standard",
+      dockerImage: "postgres:16-alpine",
+      dockerComposeSnippet: `  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret`,
+      selfHostedCost: 0,
+      complexity: "low",
+      configTemplate: "DATABASE_URL=postgresql://postgres:secret@postgres:5432/app",
+      codeReplacement: {
+        from: ["@neondatabase/serverless"],
+        to: "pg",
+        instructions: "Utiliser le driver pg standard"
+      }
+    }
+  }
+];
+
+export const COST_CATEGORIES = {
+  ai: { label: "IA / LLM", icon: "🤖", color: "purple" },
+  vectordb: { label: "Base Vectorielle", icon: "🧮", color: "blue" },
+  auth: { label: "Authentification", icon: "🔐", color: "green" },
+  search: { label: "Recherche", icon: "🔍", color: "yellow" },
+  realtime: { label: "Temps Réel", icon: "⚡", color: "orange" },
+  email: { label: "Email", icon: "📧", color: "pink" },
+  storage: { label: "Stockage", icon: "💾", color: "cyan" },
+  analytics: { label: "Analytics", icon: "📊", color: "indigo" },
+  database: { label: "Base de données", icon: "🗄️", color: "gray" }
+} as const;
+
+export function analyzeCostlyServices(files: Map<string, string>, packageJsonContent?: string): CostAnalysisResult {
+  const detectedServices: CostlyServiceDetection[] = [];
+  const detectedServiceIds = new Set<string>();
+
+  if (packageJsonContent) {
+    try {
+      const pkg = JSON.parse(packageJsonContent);
+      const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+      for (const service of COSTLY_SERVICES) {
+        for (const pattern of service.patterns) {
+          if (Object.keys(allDeps).some(dep => dep.includes(pattern))) {
+            if (!detectedServiceIds.has(service.id)) {
+              detectedServices.push({
+                service,
+                detectedIn: [{ file: "package.json", pattern, type: "dependency" }],
+                estimatedMonthlyCost: service.averageMonthlyCost
+              });
+              detectedServiceIds.add(service.id);
+            }
+          }
+        }
+      }
+    } catch (e) { console.error(e); }
+  }
+
+  files.forEach((content, filePath) => {
+    for (const service of COSTLY_SERVICES) {
+      service.patterns.forEach(pattern => {
+        if (content.includes(pattern) && !detectedServiceIds.has(service.id)) {
+          detectedServices.push({
+            service,
+            detectedIn: [{ file: filePath, pattern, type: "code" }],
+            estimatedMonthlyCost: service.averageMonthlyCost
+          });
+          detectedServiceIds.add(service.id);
+        }
+      });
+    }
+  });
+
+  const totalMonthlyCost = detectedServices.reduce((sum, s) => sum + s.estimatedMonthlyCost, 0);
+  return {
+    totalMonthlyCost,
+    potentialSavings: totalMonthlyCost,
+    yearlyProjection: totalMonthlyCost * 12,
+    detectedServices,
+    savingsLevel: totalMonthlyCost > 100 ? "high" : totalMonthlyCost > 0 ? "low" : "none",
+    savingsScore: Math.max(0, 100 - (totalMonthlyCost / 5))
+  };
+}
+
+export function generateDockerComposeAlternatives(services: CostlyServiceDetection[]): string {
+  const serviceSnippets = services.map(s => s.service.alternative.dockerComposeSnippet).join("\n\n");
+  return `version: "3.8"\nservices:\n${serviceSnippets}`;
+}
+
+export function generateEnvTemplate(services: CostlyServiceDetection[]): string {
+  return services.map(s => `# ${s.service.name}\n${s.service.alternative.configTemplate}`).join("\n\n");
+}
