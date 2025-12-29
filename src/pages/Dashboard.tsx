@@ -34,7 +34,8 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
-import inopayLogo from "@/assets/inopay-logo-admin.png";
+// import inopayLogoAdmin from "@/assets/inopay-logo-admin.png";
+const inopayLogoAdmin = "";
 import FofyChat from "@/components/FofyChat";
 
 type DashboardTab = "overview" | "liberation" | "history" | "audit";
