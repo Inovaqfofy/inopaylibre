@@ -1,103 +1,73 @@
-# inopay - Liberation Pack 🛡️
+# Welcome to your Lovable project
 
-## Score de Souveraineté: 40%
+## Project info
 
-Ce pack contient votre application complètement libérée des dépendances propriétaires,
-prête à être déployée sur votre propre infrastructure.
+**URL**: https://your-app-url.com
 
----
+## How can I edit this code?
 
-## 🚀 Déploiement Rapide (5 minutes)
+There are several ways of editing your application.
 
-```bash
-# 1. Transférez ce dossier sur votre VPS
-scp -r liberation-pack root@VOTRE_IP:/opt/apps/
+**Use Lovable**
 
-# 2. Connectez-vous et exécutez
-ssh root@VOTRE_IP
-cd /opt/apps/inopay
-sudo ./scripts/quick-deploy.sh
+Simply visit the [Lovable Project](https://your-app-url.com) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
-**C'est tout!** Votre app est accessible sur http://VOTRE_IP
+**Edit a file directly in GitHub**
 
----
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-## 📖 Documentation
+**Use GitHub Codespaces**
 
-| Fichier | Description |
-|---------|-------------|
-| `DEPLOY_GUIDE.html` | Guide interactif complet |
-| `SOVEREIGNTY_REPORT.md` | Détails du nettoyage effectué |
-| `OPEN_SOURCE_SERVICES.md` | Guide des alternatives open source |
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
----
+## What technologies are used for this project?
 
-## 📁 Structure
+This project is built with:
 
-```
-inopay/
-├── frontend/               # Application React nettoyée
-│   ├── src/
-│   │   └── lib/
-│   │       └── ai-client.ts   # Client IA configurable
-│   ├── Dockerfile
-│   └── Caddyfile
-├── backend/                # API Express (depuis Edge Functions)
-│   ├── src/
-│   │   ├── routes/         # Routes converties
-│   │   └── middleware/     # Auth middleware
-│   ├── _original-edge-functions/  # Code original pour référence
-│   └── Dockerfile
-├── services/               # 🆕 Services Open Source optionnels
-│   ├── ollama/             # IA locale (remplace OpenAI)
-│   ├── meilisearch/        # Recherche (remplace Algolia)
-│   └── minio/              # Stockage (remplace S3)
-├── scripts/
-│   └── quick-deploy.sh     # Script de déploiement automatique
-├── docker-compose.yml      # Stack principale
-├── docker-compose.full.yml # Stack avec tous les services
-├── .env.example            # Variables d'environnement
-├── DEPLOY_GUIDE.html       # Guide interactif
-├── OPEN_SOURCE_SERVICES.md # Guide des alternatives
-└── SOVEREIGNTY_REPORT.md   # Rapport de nettoyage
-```
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
----
+## How can I deploy this project?
 
-## 🔧 Commandes Utiles
+Simply open [Lovable](https://your-app-url.com) and click on Share -> Publish.
 
-```bash
-docker compose up -d        # Démarrer
-docker compose down         # Arrêter
-docker compose logs -f      # Logs temps réel
-docker compose restart      # Redémarrer
-docker compose ps           # Statut
-```
+## Can I connect a custom domain to my Lovable project?
 
----
+Yes, you can!
 
-## 🤖 IA Open Source
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Ce pack inclut un client IA configurable supportant:
-- **Ollama** (local, gratuit)
-- **OpenRouter** (cloud, économique)
-- **OpenAI** (si nécessaire)
-
-Voir `OPEN_SOURCE_SERVICES.md` pour les détails.
-
----
-
-## 🛡️ Souveraineté
-
-Ce code est **100% libéré** des dépendances propriétaires:
-- ✅ Aucune télémétrie
-- ✅ Aucun tracking
-- ✅ Aucune dépendance cloud obligatoire
-- ✅ Backend auto-hébergeable
-- ✅ Alternatives IA open source incluses
-
----
-
-*Généré par **InoPay** - [inopay.fr](https://inopay.fr)*
-*Libérez votre code, reprenez le contrôle!*
+Read more here: [Setting up a custom domain](https://your-app-url.com)
