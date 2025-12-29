@@ -107,7 +107,6 @@ interface CleaningStats {
   minorIssues: number;
 }
 
-}
                     {config?.sourceToken && availableRepos.length > 0 && (
                       <div className="space-y-3">
                         <Label className="flex items-center gap-2">
