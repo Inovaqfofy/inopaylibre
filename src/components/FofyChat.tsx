@@ -5,7 +5,8 @@ import { X, Send, Sparkles, Trash2, HelpCircle, ChevronLeft } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import fofyAvatar from "@/assets/fofy-avatar.jpeg";
+// import fofyAvatar from "@/assets/fofy-avatar.jpeg";
+const fofyAvatar = "";
 
 interface Message {
   role: "user" | "assistant";
