@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport de Libération - inopay</title>
+  <style>
+    @page { size: A4; margin: 2cm; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #1a1a2e; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .cover { text-align: center; padding: 60px 0; border-bottom: 3px solid #22c55e; margin-bottom: 40px; }
+    .cover h1 { font-size: 2.5rem; margin: 0; background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .cover .project-name { font-size: 1.5rem; color: #666; margin: 20px 0; }
+    .cover .score { font-size: 4rem; font-weight: bold; color: #eab308; }
+    .section { margin: 40px 0; padding: 20px; background: #f8fafc; border-radius: 12px; page-break-inside: avoid; }
+    .section h2 { color: #1a1a2e; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+    .stat { background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .stat .value { font-size: 2rem; font-weight: bold; color: #22c55e; }
+    .stat .label { color: #666; font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .badge.success { background: #dcfce7; color: #16a34a; }
+    .badge.warning { background: #fef3c7; color: #d97706; }
+    .badge.error { background: #fee2e2; color: #dc2626; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f1f5f9; font-weight: 600; }
+    .signature-box { background: #1a1a2e; color: white; padding: 20px; border-radius: 8px; font-family: monospace; word-break: break-all; font-size: 0.8rem; }
+    .footer { text-align: center; color: #666; margin-top: 60px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+    @media print { body { padding: 0; } .section { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <h1>🛡️ RAPPORT DE LIBÉRATION</h1>
+    <div class="project-name">inopay</div>
+    <div class="score">85%</div>
+    <p>Score de Souveraineté Numérique</p>
+    <p style="color:#666;">Généré le 31 décembre 2025</p>
+  </div>
+
+  <div class="section">
+    <h2>📊 Résumé Exécutif</h2>
+    <div class="stat-grid">
+      <div class="stat"><div class="value">318</div><div class="label">Fichiers analysés</div></div>
+      <div class="stat"><div class="value">90,162</div><div class="label">Lignes de code</div></div>
+      <div class="stat"><div class="value">90</div><div class="label">Routes converties</div></div>
+      <div class="stat"><div class="value">2</div><div class="label">Problèmes critiques</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>✅ Certifications</h2>
+    <table>
+      <tr><th>Certification</th><th>Statut</th></tr>
+      <tr><td>Open Source Compliance</td><td><span class="badge error">NON CONFORME</span></td></tr>
+      <tr><td>Portable Compliance</td><td><span class="badge error">NON CONFORME</span></td></tr>
+      <tr><td>Coolify Ready</td><td><span class="badge success">PRÊT</span></td></tr>
+      <tr><td>BigTech Dependencies</td><td><span class="badge warning">2 dépendance(s)</span></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🔒 Audit OWASP</h2>
+    <p>Score: <strong>0%</strong> - ⚠️ Améliorations nécessaires</p>
+    <div class="stat-grid">
+      <div class="stat"><div class="value" style="color:#dc2626">2</div><div class="label">Critiques</div></div>
+      <div class="stat"><div class="value" style="color:#f97316">10</div><div class="label">Élevés</div></div>
+      <div class="stat"><div class="value" style="color:#eab308">18</div><div class="label">Moyens</div></div>
+      <div class="stat"><div class="value" style="color:#22c55e">0</div><div class="label">Faibles</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🛡️ Audit de Sécurité</h2>
+    <p>Score: <strong>0%</strong> - ⚠️ Vulnérabilités détectées</p>
+    <p>⚠️ 17 problème(s) de sécurité</p>
+  </div>
+
+  <div class="section">
+    <h2>🔐 Signature Cryptographique</h2>
+    <p>Ce rapport est signé cryptographiquement (SHA-256) pour garantir son intégrité.</p>
+    <div class="signature-box">
+      <strong>Signature:</strong><br/>
+      0d522a12cd3e44d12b7ec21e72682e731ea96f27709703517b043202b9aec6aa<br/><br/>
+      <strong>Signé le:</strong> 2025-12-31T23:13:14.269Z
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>🛡️ Généré par <strong>InoPay NCS 2.0</strong> - La Grande Messe de Libération Numérique</p>
+    <p><a href="https://inopay.fr">inopay.fr</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Service Ollama - IA locale
+# Ajoutez ce service à votre docker-compose.yml principal
+
+ollama:
+  image: ollama/ollama:latest
+  container_name: ollama
+  restart: unless-stopped
+  ports:
+    - "11434:11434"
+  volumes:
+    - ollama_data:/root/.ollama
+  environment:
+    - OLLAMA_HOST=0.0.0.0
+  networks:
+    - app-network
+  # Décommentez pour GPU NVIDIA
+  # deploy:
+  #   resources:
+  #     reservations:
+  #       devices:
+  #         - driver: nvidia
+  #           count: all
+  #           capabilities: [gpu]
+
+# Ajoutez à volumes:
+#   ollama_data:

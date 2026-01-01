@@ -1,0 +1,398 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Inopay Design System
+   Primary: Inopay Green (#2ECC71 / #27AE60)
+   Accent: Inopay Navy Blue (#1B3A5F / #234B73)
+*/
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 29% 24%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 29% 24%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 29% 24%;
+
+    --primary: 145 63% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 29% 24%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 50%;
+
+    --accent: 210 54% 28%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 145 63% 49%;
+
+    --radius: 0.75rem;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    --info: 210 54% 28%;
+    --info-foreground: 0 0% 100%;
+    
+    --inopay-green: 145 63% 49%;
+    --inopay-green-dark: 145 63% 42%;
+    --inopay-navy: 210 54% 28%;
+    --inopay-navy-dark: 210 54% 22%;
+  }
+
+  .dark {
+    --background: 210 29% 10%;
+    --foreground: 210 20% 98%;
+
+    --card: 210 29% 14%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 210 29% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 145 63% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 29% 20%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 210 29% 18%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 210 54% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 210 29% 20%;
+    --input: 210 29% 20%;
+    --ring: 145 63% 49%;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    --info: 210 54% 45%;
+    --info-foreground: 0 0% 100%;
+    
+    --inopay-green: 145 63% 49%;
+    --inopay-green-dark: 145 63% 42%;
+    --inopay-navy: 210 54% 45%;
+    --inopay-navy-dark: 210 54% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--inopay-green)) 0%, hsl(var(--inopay-navy)) 100%);
+  }
+  
+  .gradient-inopay {
+    background: linear-gradient(90deg, hsl(210 54% 28%) 0%, hsl(145 63% 49%) 100%);
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(210 20% 96%) 100%);
+  }
+  
+  .card-shadow {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .card-shadow-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+  
+  .card-hover:hover {
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .status-border-blue {
+    border-left: 4px solid hsl(var(--accent));
+  }
+  
+  .status-border-green {
+    border-left: 4px solid hsl(var(--success));
+  }
+  
+  .status-border-yellow {
+    border-left: 4px solid hsl(var(--warning));
+  }
+  
+  .status-border-red {
+    border-left: 4px solid hsl(var(--destructive));
+  }
+  
+  .bg-inopay-green {
+    background-color: hsl(145 63% 49%);
+  }
+  
+  .bg-inopay-navy {
+    background-color: hsl(210 54% 28%);
+  }
+  
+  .text-inopay-green {
+    color: hsl(145 63% 49%);
+  }
+  
+  .text-inopay-navy {
+    color: hsl(210 54% 28%);
+  }
+
+  /* Header gradient style Mexlife */
+  .header-gradient {
+    background: linear-gradient(90deg, hsl(210 54% 28%) 0%, hsl(145 63% 49%) 100%);
+  }
+
+  /* Glassmorphism Widget Styles */
+  .glass-widget {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .neon-glow-green {
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+  }
+
+  .neon-glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+
+  /* Badge style arrondi */
+  .badge-outline-navy {
+    border: 2px solid hsl(210 54% 28%);
+    color: hsl(210 54% 28%);
+  }
+
+  /* Bouton arrondi avec ombre CTA */
+  .btn-rounded-cta {
+    border-radius: 9999px;
+    box-shadow: 0 10px 25px -5px rgba(46, 204, 113, 0.4);
+  }
+
+  /* Animation pulse pour icône */
+  .icon-pulse {
+    animation: pulse 2s infinite;
+  }
+}
+
+/* Print Styles for Liberation Report */
+@media print {
+  /* Reset page margins */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  /* Hide non-printable elements */
+  .no-print,
+  header,
+  footer,
+  nav,
+  button,
+  .sticky {
+    display: none !important;
+  }
+
+  /* Reset background colors for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Liberation Report specific styles */
+  #liberation-report {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+
+  /* Force colors to print */
+  .text-primary {
+    color: hsl(145 63% 42%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .text-success {
+    color: hsl(145 63% 35%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .text-destructive {
+    color: hsl(0 70% 50%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .text-warning {
+    color: hsl(38 80% 45%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Card styles for print */
+  .card,
+  [class*="Card"] {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 12px !important;
+  }
+
+  /* Background colors for print */
+  .bg-success\/5,
+  .bg-success\/10 {
+    background-color: hsl(145 63% 95%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .bg-primary\/5,
+  .bg-primary\/10 {
+    background-color: hsl(145 63% 95%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .bg-warning\/5,
+  .bg-warning\/10 {
+    background-color: hsl(38 92% 95%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* QR Code section */
+  .qr-code-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Progress bars for print */
+  .bg-destructive {
+    background-color: hsl(0 70% 50%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .bg-success {
+    background-color: hsl(145 63% 42%) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* SVG circles for portability score */
+  svg circle.text-success {
+    stroke: hsl(145 63% 42%) !important;
+  }
+
+  svg circle.text-destructive {
+    stroke: hsl(0 70% 50%) !important;
+  }
+
+  svg circle.text-muted {
+    stroke: #e5e7eb !important;
+  }
+
+  /* Badges for print */
+  .badge,
+  [class*="Badge"] {
+    border: 1px solid currentColor !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Links */
+  a {
+    color: hsl(210 54% 40%) !important;
+    text-decoration: underline !important;
+  }
+
+  /* Footer */
+  #liberation-report > div:last-child {
+    page-break-before: avoid;
+    margin-top: 20px !important;
+    padding-top: 15px !important;
+    border-top: 1px solid #e5e7eb !important;
+  }
+
+  /* Typography adjustments */
+  h1 {
+    font-size: 24px !important;
+  }
+
+  h2, h3 {
+    font-size: 16px !important;
+  }
+
+  p, span, li {
+    font-size: 12px !important;
+  }
+
+  /* Reduce spacing */
+  .mb-6 {
+    margin-bottom: 12px !important;
+  }
+
+  .mb-8 {
+    margin-bottom: 16px !important;
+  }
+
+  .mb-10 {
+    margin-bottom: 20px !important;
+  }
+
+  .p-8 {
+    padding: 16px !important;
+  }
+
+  .gap-6 {
+    gap: 12px !important;
+  }
+}

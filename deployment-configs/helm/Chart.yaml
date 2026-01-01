@@ -1,0 +1,6 @@
+apiVersion: v2
+name: inopay
+description: inopay - Helm Chart by InoPay NCS 2.0
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

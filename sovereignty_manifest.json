@@ -1,0 +1,26 @@
+{
+  "version": "2.0",
+  "projectName": "inopay",
+  "generatedAt": "2025-12-31T23:13:14.261Z",
+  "certification": {
+    "openSourceCompliance": false,
+    "portableCompliance": false,
+    "coolifyCompliance": true,
+    "bigTechDependency": 2
+  },
+  "audit": {
+    "score": 85,
+    "criticalIssues": 2,
+    "warnings": 1,
+    "owaspScore": 100,
+    "securityScore": 80
+  },
+  "statistics": {
+    "filesCount": 318,
+    "linesOfCode": 90162,
+    "testsGenerated": 90,
+    "routesConverted": 90
+  },
+  "signature": "0d522a12cd3e44d12b7ec21e72682e731ea96f27709703517b043202b9aec6aa",
+  "signedAt": "2025-12-31T23:13:14.269Z"
+}

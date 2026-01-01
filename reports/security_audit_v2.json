@@ -1,0 +1,116 @@
+{
+  "isSecure": false,
+  "score": 0,
+  "categories": {
+    "dangerousFunctions": [
+      {
+        "severity": "high",
+        "file": "src/components/admin/AdminEmailCMS.tsx",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "critical",
+        "file": "src/components/dashboard/SecurityAuditReport.tsx",
+        "description": "eval() - Exécution de code arbitraire",
+        "remediation": "Utilisez JSON.parse()"
+      },
+      {
+        "severity": "high",
+        "file": "src/components/dashboard/liberation/AssetDownloader.tsx",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "high",
+        "file": "src/components/dashboard/liberation/TypeScriptValidator.tsx",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "critical",
+        "file": "src/lib/clientProprietaryPatterns.ts",
+        "description": "eval() - Exécution de code arbitraire",
+        "remediation": "Utilisez JSON.parse()"
+      },
+      {
+        "severity": "critical",
+        "file": "src/lib/clientProprietaryPatterns.ts",
+        "description": "new Function() - Code dynamique",
+        "remediation": "Évitez la création dynamique"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/clientProprietaryPatterns.ts",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/clientProprietaryPatterns.ts",
+        "description": "child_process - Spawn de processus",
+        "remediation": "Limitez et validez"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/edgeFunctionParser.ts",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "critical",
+        "file": "src/lib/ncsV2.ts",
+        "description": "eval() - Exécution de code arbitraire",
+        "remediation": "Utilisez JSON.parse()"
+      },
+      {
+        "severity": "critical",
+        "file": "src/lib/ncsV2.ts",
+        "description": "new Function() - Code dynamique",
+        "remediation": "Évitez la création dynamique"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/ncsV2.ts",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/ncsV2.ts",
+        "description": "child_process - Spawn de processus",
+        "remediation": "Limitez et validez"
+      },
+      {
+        "severity": "high",
+        "file": "src/lib/rlsPolicyExtractor.ts",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
+      }
+    ],
+    "suspiciousDNS": [],
+    "credentialLeaks": [],
+    "hiddenTelemetry": [
+      {
+        "severity": "medium",
+        "file": "src/components/ui/scroll-area.tsx",
+        "description": "Monitoring tiers",
+        "remediation": "Utilisez Glitchtip self-hosted"
+      },
+      {
+        "severity": "medium",
+        "file": "src/lib/ncsV2.ts",
+        "description": "Monitoring tiers",
+        "remediation": "Utilisez Glitchtip self-hosted"
+      },
+      {
+        "severity": "medium",
+        "file": "src/lib/ncsV2.ts",
+        "description": "Google Analytics",
+        "remediation": "Utilisez Plausible/Umami"
+      }
+    ],
+    "backdoors": []
+  },
+  "summary": "⚠️ 17 problème(s) de sécurité"
+}
