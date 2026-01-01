@@ -1,0 +1,223 @@
+{
+  "score": 0,
+  "passed": false,
+  "issues": [
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/DeploymentValidator.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/admin/AdminNetworkDiagnostic.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/CoolifyGuide.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/components/dashboard/CoolifyGuide.tsx",
+      "description": "XSS potentiel via innerHTML",
+      "fix": "Utilisez textContent ou sanitisez"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "critical",
+      "file": "src/components/dashboard/CoolifyOrphansCleanupButton.tsx",
+      "description": "SQL Injection potentielle",
+      "fix": "Utilisez des requêtes paramétrées"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/CoolifyTokenConfig.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/DeploymentAssistant.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A07_IdentificationFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/HetznerAutoProvision.tsx",
+      "description": "Mot de passe faible potentiel",
+      "fix": "Exigez des mots de passe forts"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/components/dashboard/MyPersonalFleet.tsx",
+      "description": "XSS potentiel via innerHTML",
+      "fix": "Utilisez textContent ou sanitisez"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/SelfLiberationLauncher.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/components/dashboard/ServerSettingsDialog.tsx",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/components/ui/chart.tsx",
+      "description": "XSS potentiel via dangerouslySetInnerHTML",
+      "fix": "Sanitisez avec DOMPurify"
+    },
+    {
+      "category": "A09_SecurityLogging",
+      "severity": "high",
+      "file": "src/hooks/useAuth.tsx",
+      "description": "Log de données sensibles",
+      "fix": "Ne loggez jamais de données sensibles"
+    },
+    {
+      "category": "A07_IdentificationFailures",
+      "severity": "medium",
+      "file": "src/lib/clientProprietaryPatterns.ts",
+      "description": "Mot de passe faible potentiel",
+      "fix": "Exigez des mots de passe forts"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/completeLiberationGuide.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/lib/completeLiberationGuide.ts",
+      "description": "XSS potentiel via innerHTML",
+      "fix": "Utilisez textContent ou sanitisez"
+    },
+    {
+      "category": "A07_IdentificationFailures",
+      "severity": "medium",
+      "file": "src/lib/completeLiberationGuide.ts",
+      "description": "Mot de passe faible potentiel",
+      "fix": "Exigez des mots de passe forts"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/coolifyUrlValidator.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/costOptimization.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/deployGuideTemplate.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/ncsV2.ts",
+      "description": "Algorithme de hash faible",
+      "fix": "Utilisez SHA-256 ou bcrypt"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/ncsV2.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "critical",
+      "file": "src/lib/ncsV2.ts",
+      "description": "SQL Injection potentielle",
+      "fix": "Utilisez des requêtes paramétrées"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/lib/ncsV2.ts",
+      "description": "XSS potentiel via dangerouslySetInnerHTML",
+      "fix": "Sanitisez avec DOMPurify"
+    },
+    {
+      "category": "A07_IdentificationFailures",
+      "severity": "medium",
+      "file": "src/lib/ncsV2.ts",
+      "description": "Mot de passe faible potentiel",
+      "fix": "Exigez des mots de passe forts"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/postDeploymentChecklist.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/lib/postDeploymentChecklist.ts",
+      "description": "XSS potentiel via innerHTML",
+      "fix": "Utilisez textContent ou sanitisez"
+    },
+    {
+      "category": "A09_SecurityLogging",
+      "severity": "high",
+      "file": "src/lib/selfHostedAuthTemplate.ts",
+      "description": "Log de données sensibles",
+      "fix": "Ne loggez jamais de données sensibles"
+    },
+    {
+      "category": "A03_Injection",
+      "severity": "high",
+      "file": "src/main.tsx",
+      "description": "XSS potentiel via innerHTML",
+      "fix": "Utilisez textContent ou sanitisez"
+    },
+    {
+      "category": "A09_SecurityLogging",
+      "severity": "high",
+      "file": "backend/src/routes/generate-archive.ts",
+      "description": "Log de données sensibles",
+      "fix": "Ne loggez jamais de données sensibles"
+    }
+  ],
+  "summary": {
+    "total": 30,
+    "critical": 2,
+    "high": 10,
+    "medium": 18,
+    "low": 0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "totalIssues": 3,
+  "criticalCount": 2,
+  "warningCount": 1,
+  "entries": [
+    {
+      "type": "critical",
+      "issue": "src/components/PostDeploymentAssistant.tsx: Clé Stripe live exposée"
+    },
+    {
+      "type": "critical",
+      "issue": "src/components/SovereignExport.tsx: Clé Stripe live exposée"
+    },
+    {
+      "type": "warning",
+      "issue": "src/components/dashboard/BuildValidator.tsx: Plugin Lovable"
+    }
+  ],
+  "summary": {
+    "sovereigntyScore": 85,
+    "isClean": false
+  }
+}

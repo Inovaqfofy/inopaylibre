@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Post-Déploiement - inopay</title>
+  <style>
+    :root { --primary: #6366f1; --success: #22c55e; --warning: #f59e0b; --danger: #ef4444; --info: #3b82f6; --bg: #0f172a; --bg-card: #1e293b; --text: #e2e8f0; --text-muted: #94a3b8; --border: #334155; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 2.5rem; background: linear-gradient(135deg, var(--primary), #4f46e5); border-radius: 1.5rem; margin-bottom: 2rem; }
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .config-section { background: var(--bg-card); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+    .config-section h3 { color: #818cf8; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .input-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .input-group label { flex: 1; min-width: 200px; }
+    .input-group label span { display: block; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    input[type="text"], input[type="url"] { width: 100%; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: 0.5rem; color: var(--text); font-size: 1rem; }
+    input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #818cf8; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .actions { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+    .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--bg-card); border-radius: 1rem; padding: 1.25rem; text-align: center; border: 1px solid var(--border); }
+    .stat-card .value { font-size: 1.75rem; font-weight: 700; }
+    .stat-card .label { color: var(--text-muted); font-size: 0.875rem; }
+    .stat-card.success .value { color: var(--success); }
+    .stat-card.danger .value { color: var(--danger); }
+    .checks-grid { display: grid; gap: 1rem; }
+    .check-card { background: var(--bg-card); border-radius: 1rem; padding: 1.25rem; border: 1px solid var(--border); transition: all 0.3s; }
+    .check-card.running { border-color: var(--info); animation: pulse 1.5s infinite; }
+    .check-card.success { border-color: var(--success); }
+    .check-card.failed { border-color: var(--danger); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .check-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+    .check-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; background: rgba(148, 163, 184, 0.2); }
+    .check-card.success .check-icon { background: rgba(34, 197, 94, 0.2); }
+    .check-card.failed .check-icon { background: rgba(239, 68, 68, 0.2); }
+    .check-card.running .check-icon { background: rgba(59, 130, 246, 0.2); }
+    .check-info { flex: 1; }
+    .check-info h4 { margin-bottom: 0.25rem; }
+    .check-info p { color: var(--text-muted); font-size: 0.875rem; }
+    .check-badge { padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .badge-critical { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    .badge-optional { background: rgba(148, 163, 184, 0.2); color: var(--text-muted); }
+    .check-details { background: var(--bg); border-radius: 0.5rem; padding: 1rem; font-family: monospace; font-size: 0.8rem; margin-top: 0.75rem; }
+    .check-details .endpoint { color: var(--info); }
+    .check-details .error { color: var(--danger); }
+    .check-details .timing { color: var(--text-muted); }
+    .section-title { display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0 1rem; font-size: 1.25rem; }
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 1rem 0; display: none; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); transition: width 0.3s; }
+    .log-panel { background: #0d1117; border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border); max-height: 300px; overflow-y: auto; }
+    .log-panel h3 { margin-bottom: 1rem; }
+    .log-entry { font-family: monospace; font-size: 0.8rem; padding: 0.375rem 0; border-bottom: 1px solid var(--border); }
+    .log-entry .time { color: var(--text-muted); }
+    .log-entry.success { color: var(--success); }
+    .log-entry.error { color: var(--danger); }
+    .summary-card { background: var(--bg-card); border-radius: 1.5rem; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border); text-align: center; display: none; }
+    .summary-card .score { font-size: 3.5rem; font-weight: 700; margin: 1rem 0; }
+    .summary-card .score.good { color: var(--success); }
+    .summary-card .score.medium { color: var(--warning); }
+    .summary-card .score.bad { color: var(--danger); }
+    .retry-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(99, 102, 241, 0.2); border: 1px solid var(--primary); border-radius: 0.5rem; color: var(--primary); font-size: 0.875rem; cursor: pointer; margin-top: 0.5rem; }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.875rem; }
+    @media (max-width: 768px) { .container { padding: 1rem; } .input-group, .actions { flex-direction: column; } .btn { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✅ Checklist Post-Déploiement</h1>
+      <p>inopay - Vérification automatique des services</p>
+    </header>
+    
+    <section class="config-section">
+      <h3>⚙️ Configuration</h3>
+      <div class="input-group">
+        <label><span>URL de base</span><input type="url" id="baseUrl" placeholder="https://votre-domaine.com"></label>
+        <label><span>JWT Token (optionnel)</span><input type="text" id="authToken" placeholder="eyJhbGciOiJIUzI1NiIs..."></label>
+      </div>
+    </section>
+    
+    <div class="actions">
+      <button class="btn btn-primary" id="runAllBtn" onclick="runAllChecks()">🚀 Lancer les vérifications</button>
+      <button class="btn btn-outline" onclick="resetChecks()">🔄 Réinitialiser</button>
+      <button class="btn btn-outline" onclick="exportReport()">📄 Exporter</button>
+    </div>
+    
+    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+    
+    <div class="stats-bar">
+      <div class="stat-card" id="statTotal"><div class="value">-</div><div class="label">Total</div></div>
+      <div class="stat-card" id="statPassed"><div class="value">-</div><div class="label">Réussis</div></div>
+      <div class="stat-card" id="statFailed"><div class="value">-</div><div class="label">Échoués</div></div>
+      <div class="stat-card" id="statTime"><div class="value">-</div><div class="label">Durée</div></div>
+    </div>
+    
+    <h2 class="section-title"><span>🔍</span> Vérifications</h2>
+    <div class="checks-grid" id="checksGrid"></div>
+    
+    <div class="log-panel"><h3>📋 Journal</h3><div id="logContainer"></div></div>
+    <div class="summary-card" id="summaryCard"><h2>Résumé</h2><div class="score" id="summaryScore">-</div><p id="summaryText"></p></div>
+  </div>
+  <footer><p>InoPay Liberation Pack</p></footer>
+  
+  <script>
+    const checks = [{"name":"Frontend","type":"http","endpoint":"/","method":"GET","expectedStatus":200,"description":"Vérification que le frontend est accessible","critical":true},{"name":"Health Check","type":"api","endpoint":"/health","method":"GET","expectedStatus":200,"description":"Endpoint de santé du serveur","critical":true},{"name":"API: admin_list_payments","type":"api","endpoint":"/api/admin_list_payments","method":"GET","description":"Endpoint admin_list_payments","critical":false},{"name":"API: admin_list_subscriptions","type":"api","endpoint":"/api/admin_list_subscriptions","method":"GET","description":"Endpoint admin_list_subscriptions","critical":false},{"name":"API: admin_list_users","type":"api","endpoint":"/api/admin_list_users","method":"GET","description":"Endpoint admin_list_users","critical":false},{"name":"API: admin_manage_subscription","type":"api","endpoint":"/api/admin_manage_subscription","method":"GET","description":"Endpoint admin_manage_subscription","critical":false},{"name":"API: admin_manage_tester","type":"api","endpoint":"/api/admin_manage_tester","method":"GET","description":"Endpoint admin_manage_tester","critical":false},{"name":"API: admin_signout_all","type":"api","endpoint":"/api/admin_signout_all","method":"GET","description":"Endpoint admin_signout_all","critical":false},{"name":"API: auto_configure_coolify_app","type":"api","endpoint":"/api/auto_configure_coolify_app","method":"GET","description":"Endpoint auto_configure_coolify_app","critical":false},{"name":"API: auto_fix_dockerfile","type":"api","endpoint":"/api/auto_fix_dockerfile","method":"GET","description":"Endpoint auto_fix_dockerfile","critical":false},{"name":"API: auto_restart_container","type":"api","endpoint":"/api/auto_restart_container","method":"GET","description":"Endpoint auto_restart_container","critical":false},{"name":"API: check_deployment_status","type":"api","endpoint":"/api/check_deployment_status","method":"GET","description":"Endpoint check_deployment_status","critical":false},{"name":"Auth Service","type":"auth","endpoint":"/auth/v1/health","method":"GET","description":"Service d'authentification","critical":true}];
+    const envVars = ["PORT","NODE_ENV","JWT_SECRET","SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY","STRIPE_SECRET_KEY","SUPABASE_ANON_KEY","GITHUB_PERSONAL_ACCESS_TOKEN","RESEND_API_KEY","DEEPSEEK_API_KEY","OPENROUTER_API_KEY","ANTHROPIC_API_KEY","ENCRYPTION_MASTER_KEY","LOVABLE_API_KEY","TWILIO_ACCOUNT_SID","TWILIO_AUTH_TOKEN","TWILIO_PHONE_NUMBER","STRIPE_WEBHOOK_SECRET","VITE_SUPABASE_URL","VITE_SUPABASE_PUBLISHABLE_KEY","label","progress","VITE_SUPABASE_ANON_KEY","VITE_API_URL","VITE_STRIPE_PUBLISHABLE_KEY","token","platformName","cleanedFilesCount","platform","name","value","index","INOPAY_GREEN","INOPAY_DARK_GREEN","INOPAY_NAVY","preheader","INOPAY_LOGO_URL","content","upgraded","imported","csv","filename","failedCount","service","email","serverAge","newTesterEmail","percentage","creditAmount","countdown","filePath","projectName","totalSavings","completedCount","path","dep","config","folder","githubRepoUrl","idx","serverIp","dashboardUrl","providerName","creditType","currentPath","part","githubToken","username","cleanedUsername","maxSelection","serverName","professionalPrice","exports","totalProcessed","fileName","WEBHOOK_SECRET","totalProjects","deployedCount","readyCount","analyzedCount","averageScore","deploymentRate","statusColor","statusLabel","savings","mainScope","cleanedOwner","externalBackendUrl","missingScopes","repoOwner","repoName","attempt","retries","fetchedCount","count","successCount","errorCount","className","serverProvider","supabaseUrl","supabaseServiceKey","symbol","gridCols","vibeScore","freedomScore","savingsScore","currentToken","ext","bytes","char","expected","prefix","key","color","formDescriptionId","formMessageId","SIDEBAR_COOKIE_NAME","openState","SIDEBAR_COOKIE_MAX_AGE","minutes","hours","mins","VITE_INFRA_MODE","VITE_SELF_SUPABASE_URL","VITE_SELF_SUPABASE_ANON_KEY","VITE_SELF_SUPABASE_SERVICE_KEY","VITE_MINIO_URL","VITE_MINIO_ACCESS_KEY","VITE_MINIO_SECRET_KEY","VITE_OLLAMA_BASE_URL","VITE_SMTP_HOST","VITE_SMTP_PORT","VITE_SOKETI_HOST","VITE_SOKETI_PORT","VITE_SOKETI_APP_KEY","VITE_MEILISEARCH_URL","VITE_MEILISEARCH_API_KEY","VITE_AUTHORIZED_DOMAINS","domain","tokenToUse","PROD","trimmed","VITE_AI_BASE_URL","VITE_OLLAMA_MODEL","VITE_SMTP_FROM","OPENAI_API_KEY","PINECONE_API_KEY","passed","failed","DATABASE_URL","routeName","methodLower","businessLogic","method","functionName","VITE_OLLAMA_URL","VITE_MEILISEARCH_KEY","VITE_POCKETBASE_URL","VITE_MINIO_ENDPOINT","VITE_PUSHER_KEY","SMTP_HOST","SMTP_PORT","SMTP_USER","SMTP_PASS","API_URL","FRONTEND_URL","escapedDomain","localBase","pattern","pkg","OLLAMA_BASE_URL","cdn","SUPABASE_PROJECT_ID","APP_URL","JWT_TOKEN","escapedCdn","keyword","route","VITE_LOVABLE_","VITE_GPT_","VITE_CODEIUM_","VITE_COPILOT_","VITE_TABNINE_","VITE_CODY_","BLUE","YELLOW","RED","GREEN","COOLIFY_URL","COOLIFY_TOKEN","APP_ID","SCRIPT_DIR","diffMinutes","diffHours","diffDays","trimmedUrl","url","volumes","NEXT_PUBLIC_CLERK","NEXT_PUBLIC_SUPABASE_URL","serviceName","POSTGRES_PASSWORD","SENSITIVE_PREFIX","text","score","appName","chartName","compName","date","issue","warning","safeName","signature","totalIssues","importPath","suggestion","checksJson","envVarsJson","webhooksJson","elapsed","col","description","middlewareName","condition","role","VITE_API_KEY","CORS_ORIGIN","JWT_EXPIRY","REFRESH_TOKEN_EXPIRY","KEYCLOAK_ADMIN_PASSWORD","resetToken","migrated","skipped","criticalCount","gradeEmoji","grade","item","rec","polyfillsGenerated","version","totalFiles","removed","fileExt","hookName","keyPrefix","identifier","endpointName","delay","errorType","step","detailsStr","action","serviceRoleKey","errorText","signedOutCount","normalized","ghOwner","repoClean","gitBranchToUse","gitCommitShaToUse","project_name","coolifyUrl","errorMessage","owner","repo","appUuid","force_rebuild","force_no_cache","github_repo_url","fix_type","auto_redeploy","defaultBranch","currentCommitSha","newCommitSha","coolify_app_uuid","deployment_id","msg","deployment_uuid","app_uuid","loadTime","title","passedCount","apiKey","code","tokensUsed","userApiProvider","providerUsed","internalCostCents","apiCostCents","deletedDeploymentRecords","server_id","verify_health","force","deletedCount","branch","DB_HOST","DB_PORT","DB_NAME","DB_USER","DB_PASSWORD","DB_SSL","dbType","origin","serviceType","excessFiles","supplementAmount","secret_type","error","preferredDeploymentUuid","deploymentUuid","deploymentStatus","projectUuid","is_retry","retry_count","decryptedCoolifyToken","repoAuthMode","existingAppUuid","fallbackError","envError","attempts","maxAttempts","buildStatus","finalStatus","usedDeploymentUuid","isRedeploy","buildLogs","runtimeLogs","envLines","serverId","deploymentId","maxRetries","finalDomain","deployedUrl","VITE_ANON_KEY","user","pass","hostForResponse","errText","VITE_APP_URL","commit_sha","cleanableFiles","estimatedCostCents","tableName","columns","values","totalRows","table","databaseFunctions","storageBucket","destinationUsername","targetRepoName","currentVersion","compatibleVersion","envVar","repoFullName","repoHtmlUrl","branchName","SERVICE_ROLE_SECRET","funcName","GITHUB_TOKEN","projectId","supabaseFileCount","storagePath","VITE_AUTH_URL","MEILISEARCH_MASTER_KEY","MINIO_ACCESS_KEY","MINIO_SECRET_KEY","OLLAMA_URL","OLLAMA_MODEL","OPENROUTER_MODEL","OPENAI_MODEL","AI_PROVIDER","GITHUB_WEBHOOK_SECRET","npm_package_version","VITE_SUPABASE_PROJECT_ID","baseUrl","policyName","policyBody","icon","scoreColor","scoreEmoji","sovereigntyScore","fileCount","totalServerChanges","clientSovereigntyScore","assetCount","assetPath","sqlInserts","exportError","tablesListMd","warningsListMd","status","eventType","normalizedRepoUrl","commitSha","dry_run","reset_coolify","reset_database","reset_github","newConsecutiveFailures","responseTimeMs","batchNumber","totalBatches","inserted","npmInstallLine","copyPackageLine","colName","pgType","nullable","executed","pending","vpsIp","coolifyToken","rateLimit","ghError","srvName","coolifyError","totalTime","okCount","warningCount","statusText","usersCount","deploymentsCount","permissionLevel","hasWritePermission","newCommit","baseSha","isOwnAccount","createUrl","errorMsg","repoUrl","waitTime","pendingPaymentId","userEmail","totalChanges","repoUrlToUse","server_name","hetzner_api_token","server_type","location","ipAddress","supabasePublicUrl","setupId","rootPassword","coolifyServerUuid","endpoint","coolifyDeleted","clientIP","normalizedEmail","newSetupId","recoveryCommand","normalizedUrl","versionUrl","coolify_token","coolifyVersion","userName","hostingProvider","annualSavings","servicesHtml","portabilityScoreAfter","reportUrl","githubUrl","otpCode","accountSid","authToken","twilioAuth","callbackUrl","db_user","db_password","dbHost","dbPort","db_name","dbUser","dbPassword","dbName","scriptUrl","installCommand","targetSupabaseUrl","targetSupabaseServiceKey","projectRef","targetUrl","customerName","attemptCount","invoiceUrl","VERSION","coolifyStatus","fqdn","testUrl","urlHealthy","urlError","newStatus","newHealthStatus","appsUrl","appsCount","searchType","credit_type","provider","coolify_url","healthUrl","responseText","useBranch","destServiceKey","remainingAttempts","depName","scriptName","scriptCmd","certificationStatus","remotePath","customerId","CYAN","PROJECT_REF","TOTAL","FUNC","SUCCESS","FAILED","PURPLE","TOTAL_RAM","DISK_SPACE","SUPABASE_SERVICE_KEY","MEILISEARCH_API_KEY","filesScanned","MIN_SCORE","file","dir","relativePath","errors","warnings"];
+    const webhooks = [];
+    let results = [], startTime = null;
+    
+    function initUI() {
+      document.getElementById('checksGrid').innerHTML = checks.map((c, i) => 
+        '<div class="check-card pending" id="check-' + i + '">' +
+        '<div class="check-header"><div class="check-icon">⏳</div>' +
+        '<div class="check-info"><h4>' + c.name + '</h4><p>' + c.description + '</p></div>' +
+        '<span class="check-badge ' + (c.critical ? 'badge-critical' : 'badge-optional') + '">' + (c.critical ? 'Critique' : 'Optionnel') + '</span></div>' +
+        '<div class="check-details"><div class="endpoint">' + (c.method || 'GET') + ' ' + c.endpoint + '</div><div class="status">En attente...</div></div></div>'
+      ).join('');
+      updateStats();
+    }
+    
+    function log(msg, type) {
+      const c = document.getElementById('logContainer');
+      const t = new Date().toLocaleTimeString();
+      c.insertAdjacentHTML('afterbegin', '<div class="log-entry ' + type + '"><span class="time">[' + t + ']</span> ' + msg + '</div>');
+    }
+    
+    function updateStats() {
+      const total = checks.length, passed = results.filter(r => r.success).length, failed = results.filter(r => !r.success && r.done).length;
+      const elapsed = startTime ? ((Date.now() - startTime) / 1000).toFixed(1) + 's' : '-';
+      document.getElementById('statTotal').querySelector('.value').textContent = total;
+      document.getElementById('statPassed').querySelector('.value').textContent = passed;
+      document.getElementById('statFailed').querySelector('.value').textContent = failed;
+      document.getElementById('statTime').querySelector('.value').textContent = elapsed;
+      document.getElementById('statPassed').className = 'stat-card ' + (passed > 0 ? 'success' : '');
+      document.getElementById('statFailed').className = 'stat-card ' + (failed > 0 ? 'danger' : '');
+    }
+    
+    async function runCheck(i) {
+      const c = checks[i], card = document.getElementById('check-' + i);
+      const base = document.getElementById('baseUrl').value.replace(/\/$/, '');
+      const token = document.getElementById('authToken').value;
+      if (!base) { log('❌ URL de base requise', 'error'); return { success: false, done: true }; }
+      
+      card.className = 'check-card running';
+      card.querySelector('.check-icon').textContent = '🔄';
+      card.querySelector('.status').textContent = 'Vérification...';
+      
+      try {
+        const ctrl = new AbortController();
+        const tid = setTimeout(() => ctrl.abort(), c.timeout || 10000);
+        const headers = { 'Content-Type': 'application/json' };
+        if (token && c.type === 'api') headers['Authorization'] = 'Bearer ' + token;
+        
+        const t0 = performance.now();
+        const res = await fetch(base + c.endpoint, { method: c.method || 'GET', headers, signal: ctrl.signal });
+        clearTimeout(tid);
+        const ms = (performance.now() - t0).toFixed(0);
+        const ok = res.status === (c.expectedStatus || 200) || (res.status >= 200 && res.status < 300);
+        
+        card.className = 'check-card ' + (ok ? 'success' : 'failed');
+        card.querySelector('.check-icon').textContent = ok ? '✅' : '❌';
+        card.querySelector('.status').innerHTML = 'Status: <strong>' + res.status + '</strong><div class="timing">' + ms + 'ms</div>';
+        log((ok ? '✅' : '❌') + ' ' + c.name + ' - ' + res.status + ' (' + ms + 'ms)', ok ? 'success' : 'error');
+        return { success: ok, status: res.status, time: ms, done: true };
+      } catch (e) {
+        const msg = e.name === 'AbortError' ? 'Timeout' : e.message;
+        card.className = 'check-card failed';
+        card.querySelector('.check-icon').textContent = '❌';
+        card.querySelector('.status').innerHTML = '<div class="error">' + msg + '</div><button class="retry-btn" onclick="retryCheck(' + i + ')">🔄 Réessayer</button>';
+        log('❌ ' + c.name + ' - ' + msg, 'error');
+        return { success: false, error: msg, done: true };
+      }
+    }
+    
+    async function runAllChecks() {
+      const base = document.getElementById('baseUrl').value;
+      if (!base) { log('⚠️ Entrez l\'URL de base', 'warning'); document.getElementById('baseUrl').focus(); return; }
+      document.getElementById('runAllBtn').disabled = true;
+      document.getElementById('progressBar').style.display = 'block';
+      document.getElementById('summaryCard').style.display = 'none';
+      results = []; startTime = Date.now();
+      log('🚀 Démarrage...', 'info');
+      
+      for (let i = 0; i < checks.length; i++) {
+        results[i] = await runCheck(i);
+        document.getElementById('progressFill').style.width = ((i + 1) / checks.length * 100) + '%';
+        updateStats();
+        await new Promise(r => setTimeout(r, 150));
+      }
+      showSummary();
+      document.getElementById('runAllBtn').disabled = false;
+      log('✅ Terminé', 'success');
+    }
+    
+    async function retryCheck(i) { results[i] = await runCheck(i); updateStats(); showSummary(); }
+    
+    function showSummary() {
+      const passed = results.filter(r => r.success).length;
+      const score = Math.round((passed / checks.length) * 100);
+      const cls = score >= 90 ? 'good' : score >= 60 ? 'medium' : 'bad';
+      const msg = score === 100 ? '🎉 Tous les services sont opérationnels!' : score >= 80 ? '✅ La plupart des services fonctionnent.' : '❌ Vérifiez la configuration.';
+      document.getElementById('summaryScore').textContent = score + '%';
+      document.getElementById('summaryScore').className = 'score ' + cls;
+      document.getElementById('summaryText').textContent = msg;
+      document.getElementById('summaryCard').style.display = 'block';
+    }
+    
+    function resetChecks() { results = []; startTime = null; document.getElementById('progressBar').style.display = 'none'; document.getElementById('summaryCard').style.display = 'none'; document.getElementById('logContainer').innerHTML = ''; initUI(); log('🔄 Réinitialisé', 'info'); }
+    
+    function exportReport() {
+      const r = { project: 'inopay', url: document.getElementById('baseUrl').value, time: new Date().toISOString(), checks: checks.map((c, i) => ({ ...c, result: results[i] || {} })), score: Math.round((results.filter(r => r.success).length / checks.length) * 100) };
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(r, null, 2)], { type: 'application/json' }));
+      a.download = 'inopay-deploy-report.json';
+      a.click();
+      log('📄 Rapport exporté', 'success');
+    }
+    
+    initUI();
+    log('👋 Configurez l\'URL puis lancez les vérifications', 'info');
+  </script>
+</body>
+</html>

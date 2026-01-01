@@ -1,0 +1,92 @@
+{
+  "isProductionReady": false,
+  "overallScore": 60,
+  "timestamp": "2025-12-31T23:13:14.313Z",
+  "projectName": "inopay",
+  "checklist": {
+    "build": {
+      "passed": true,
+      "details": [
+        "✅ Script build présent",
+        "✅ Script start/preview présent",
+        "✅ 69 dépendances déclarées",
+        "✅ Script build présent",
+        "✅ Script start/preview présent",
+        "✅ 12 dépendances déclarées"
+      ],
+      "score": 100
+    },
+    "runtime": {
+      "passed": true,
+      "details": [
+        "✅ index.html présent",
+        "✅ Point d'entrée JS/TS détecté",
+        "✅ Configuration Vite présente",
+        "✅ Aucun import cassé détecté"
+      ],
+      "score": 100
+    },
+    "database": {
+      "passed": true,
+      "details": [
+        "ℹ️ Base de données non incluse"
+      ],
+      "score": 100
+    },
+    "api": {
+      "passed": true,
+      "details": [
+        "✅ Endpoint /health présent",
+        "✅ 8 routes détectées"
+      ],
+      "score": 100
+    },
+    "security": {
+      "passed": false,
+      "details": [],
+      "score": 0
+    },
+    "coolify": {
+      "passed": true,
+      "details": [
+        "✅ Dockerfile valide",
+        "✅ docker-compose.yml présent"
+      ],
+      "score": 90
+    },
+    "integrity": {
+      "passed": false,
+      "details": [
+        "❌ JSON invalide: tsconfig.app.json",
+        "❌ JSON invalide: tsconfig.node.json",
+        "✅ Aucun fichier vide",
+        "✅ Aucun fichier tronqué"
+      ],
+      "score": 70
+    },
+    "documentation": {
+      "passed": true,
+      "details": [
+        "✅ README présent",
+        "✅ Guide de déploiement présent"
+      ],
+      "score": 100
+    }
+  },
+  "criticalBlockers": [
+    "6 secrets codés en dur détectés",
+    "Usage de eval() détecté - risque d'injection"
+  ],
+  "warnings": [
+    "116 console.log à retirer pour la production"
+  ],
+  "recommendations": [
+    "Créer .env.example pour documenter les variables"
+  ],
+  "certifications": {
+    "coolifyReady": true,
+    "dockerReady": true,
+    "sovereigntyCompliant": false,
+    "securityAudited": false
+  }
+}
