@@ -5,7 +5,7 @@ export const SIGNATURE_PATTERNS = {
   // Attributs]*"/gi,
   dataLovablePath: /\s*]*"/gi,
   dataLovableComponent: /\s*]*"/gi,
-  dataLovableGeneric: /\s*data-lovable[^=]*="[^"]*"/gi,
+  dataLovableGeneric: /\s*data-[PLATFORM][^=]*="[^"]*"/gi,
   
   // Attributs data-* génériques de plateformes
   dataBoltId: /\s*]*"/gi,
@@ -33,7 +33,7 @@ export const SIGNATURE_PATTERNS = {
   lovableTaggerUsage: /componentTagger\(\),?\s*/gi,
   
   // Métadonnées dans les attributs HTML
-  lovableSourceMap: /\/\*#\s*sourceMappingURL=[^*]*lovable[^*]*\*\//gi,
+  lovableSourceMap: /\/\*#\s*sourceMappingURL=[^*]*[PLATFORM][^*]*\*\//gi,
 };
 
 // Nettoyer le contenu d'un fichier
@@ -56,7 +56,7 @@ export const cleanFileContent = (content: string): string => {
 
 // Liste des préfixes d'attributs à nettoyer
 const PLATFORM_PREFIXES = [
-  'data-lovable',
+  'data-[PLATFORM]',
   'data-bolt',
   'data-v0',
   'data-cursor',
@@ -101,7 +101,7 @@ const cleanHTMLComments = (): void => {
   while ((node = walker.nextNode() as Comment | null)) {
     const content = node.textContent?.toLowerCase() || '';
     if (
-      content.includes('lovable') ||
+      content.includes('[PLATFORM]') ||
       content.includes('bolt') ||
       content.includes("") ||
       content.includes('cursor') ||
@@ -170,15 +170,15 @@ export const PROPRIETARY_DEPS: Record<string, {
   version: string;
   reason: string;
 }> = {
-  'lovable-tagger': {
+  '[PLATFORM]-tagger': {
     replacement: '',
     version: '',
     reason: 'IDE-specific, not needed in production',
   },
-  '@lovable/ui': {
+  '@[PLATFORM]/ui': {
     replacement: '@radix-ui/react-*',
     version: 'latest',
-    reason: 'Lovable-specific UI wrapper',
+    reason: '[PLATFORM]-specific UI wrapper',
   },
   '@bolt/runtime': {
     replacement: '',
@@ -259,8 +259,8 @@ export const cleanPackageJson = (packageJson: Record<string, unknown>): Record<s
   // Supprimer les scripts spécifiques IDE
   if (cleaned.scripts && typeof cleaned.scripts === 'object') {
     const scripts = { ...(cleaned.scripts as Record<string, string>) };
-    delete scripts['lovable:tag'];
-    delete scripts['lovable:dev'];
+    delete scripts['[PLATFORM]:tag'];
+    delete scripts['[PLATFORM]:dev'];
     delete scripts['bolt:preview'];
     delete scripts['v0:preview'];
     cleaned.scripts = scripts;

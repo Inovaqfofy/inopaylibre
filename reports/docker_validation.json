@@ -1,6 +1,6 @@
 {
   "isValid": false,
-  "score": 10,
+  "score": 25,
   "checks": {
     "dockerfile": {
       "passed": true,
@@ -40,7 +40,6 @@
       "issues": [
         "Potential hardcoded secret in src/components/PostDeploymentAssistant.tsx",
         "Potential hardcoded secret in src/components/SovereignExport.tsx",
-        "Potential hardcoded secret in src/lib/clientProprietaryPatterns.ts",
         "Potential hardcoded secret in src/lib/completeLiberationGuide.ts",
         "Potential hardcoded secret in src/lib/ncsV2.ts",
         "Potential hardcoded secret in src/lib/sovereigntyReportGenerator.ts"

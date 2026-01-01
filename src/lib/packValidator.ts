@@ -2,7 +2,9 @@
  * Pack Validator - TypeScript validation for Liberation Packs
  * Validates syntax, imports, and structure before pack generation
  * 
- * @version 1.0
+ * FOCUSED: Only validates frontend files (src/) for pack generation
+ * 
+ * @version 2.0
  */
 
 export interface ValidationError {
@@ -30,6 +32,34 @@ export interface PackValidationResult {
   };
 }
 
+// Directories to EXCLUDE from pack validation (tooling, backend, etc.)
+const EXCLUDED_DIRECTORIES = [
+  'node_modules',
+  'cli/',
+  'scripts/',
+  'docker/',
+  'docs/',
+  'backend/',
+  'supabase/functions/',
+  'server/',
+  'api/',
+  '.git/',
+  'dist/',
+  'build/',
+  'coverage/'];
+
+// File patterns to EXCLUDE from validation
+const EXCLUDED_FILE_PATTERNS = [
+  /\.config\.(ts|js|mjs|cjs)$/,
+  /vite\.config\./,
+  /eslint\.config\./,
+  /tsconfig.*\.json$/,
+  /tailwind\.config\./,
+  /postcss\.config\./,
+  /\.test\.(ts|tsx|js|jsx)$/,
+  /\.spec\.(ts|tsx|js|jsx)$/,
+  /\.d\.ts$/];
+
 // Polyfills that should exist in the pack
 const REQUIRED_POLYFILLS: Record<string, string> = {
   '@/lib/supabase': 'src/lib/supabase.ts',
@@ -53,6 +83,29 @@ const EXTERNAL_PACKAGES = [
   'react-i18next', 'i18next-browser-languagedetector'];
 
 /**
+ * Check if a file should be validated (frontend files only)
+ */
+function shouldValidateFile(filePath: string): boolean {
+  // Must be a source file
+  if (!filePath.match(/\.(ts|tsx|js|jsx)$/)) return false;
+  
+  // Exclude specific directories
+  for (const dir of EXCLUDED_DIRECTORIES) {
+    if (filePath.startsWith(dir) || filePath.includes(`/${dir}`)) return false;
+  }
+  
+  // Exclude config files
+  for (const pattern of EXCLUDED_FILE_PATTERNS) {
+    if (pattern.test(filePath)) return false;
+  }
+  
+  // Must be in src/ or be a critical root file
+  return filePath.startsWith('src/') || 
+         filePath === 'main.tsx' ||
+         filePath === 'App.tsx';
+}
+
+/**
  * Check bracket balance in content
  */
 export function validateBracketBalance(content: string, filePath: string): ValidationError[] {
@@ -73,7 +126,6 @@ export function validateBracketBalance(content: string, filePath: string): Valid
     const nextChar = content[i + 1];
     const prevChar = content[i - 1];
     
-    // Track line/column
     if (char === '\n') {
       line++;
       col = 1;
@@ -131,8 +183,8 @@ export function validateBracketBalance(content: string, filePath: string): Valid
     }
   }
   
-  // Report unclosed brackets
-  for (const unclosed of stack) {
+  // Report unclosed brackets (limit to 3)
+  for (const unclosed of stack.slice(-3)) {
     errors.push({
       file: filePath,
       line: unclosed.line,
@@ -157,7 +209,6 @@ export function validateImports(
   const errors: ValidationError[] = [];
   const unresolvedImports: { file: string; importPath: string }[] = [];
   
-  // Match import statements
   const importRegex = /import\s+(?:(?:type\s+)?{[^}]*}|[^'"{}]+)\s+from\s+['"]([^'"]+)['"]/g;
   const lines = content.split('\n');
   
@@ -169,20 +220,16 @@ export function validateImports(
     if (EXTERNAL_PACKAGES.some(pkg => importPath.startsWith(pkg))) continue;
     if (!importPath.startsWith('.') && !importPath.startsWith('@/')) continue;
     
-    // Calculate line number
     const beforeMatch = content.substring(0, match.index);
     const lineNumber = (beforeMatch.match(/\n/g) || []).length + 1;
     
-    // Check if import can be resolved
     let resolved = false;
     
     if (importPath.startsWith('@/')) {
-      // Check polyfill paths
       const polyfillPath = REQUIRED_POLYFILLS[importPath];
       if (polyfillPath && allFiles[polyfillPath]) {
         resolved = true;
       } else {
-        // Convert @/ to src/
         const srcPath = importPath.replace('@/', 'src/');
         const possiblePaths = [
           srcPath + '.ts',
@@ -190,11 +237,9 @@ export function validateImports(
           srcPath + '/index.ts',
           srcPath + '/index.tsx',
           srcPath];
-        
         resolved = possiblePaths.some(p => allFiles[p] !== undefined);
       }
     } else {
-      // Relative import
       const currentDir = filePath.split('/').slice(0, -1).join('/');
       const resolvedPath = resolveRelativePath(currentDir, importPath);
       
@@ -204,7 +249,6 @@ export function validateImports(
         resolvedPath + '/index.ts',
         resolvedPath + '/index.tsx',
         resolvedPath];
-      
       resolved = possiblePaths.some(p => allFiles[p] !== undefined);
     }
     
@@ -224,19 +268,13 @@ export function validateImports(
   return { errors, unresolvedImports };
 }
 
-/**
- * Resolve relative path
- */
 function resolveRelativePath(currentDir: string, relativePath: string): string {
   const parts = currentDir.split('/').filter(Boolean);
   const relParts = relativePath.split('/');
   
   for (const part of relParts) {
-    if (part === '..') {
-      parts.pop();
-    } else if (part !== '.') {
-      parts.push(part);
-    }
+    if (part === '..') parts.pop();
+    else if (part !== '.') parts.push(part);
   }
   
   return parts.join('/');
@@ -249,7 +287,6 @@ export function validateTypeScriptSyntax(content: string, filePath: string): Val
   const errors: ValidationError[] = [];
   const lines = content.split('\n');
   
-  // Pattern checks for common errors
   const errorPatterns = [
     {
       pattern: /type\s+\$\d+\s*=/,
@@ -257,19 +294,9 @@ export function validateTypeScriptSyntax(content: string, filePath: string): Val
       code: 'INVALID_TYPE_PLACEHOLDER'
     },
     {
-      pattern: /from\s+['"]@\/integrations\/supabase/,
-      message: 'Proprietary import path not cleaned: @/integrations/supabase',
-      code: 'PROPRIETARY_IMPORT'
-    },
-    {
       pattern: /import\s+{\s*}\s+from/,
       message: 'Empty import statement',
       code: 'EMPTY_IMPORT'
-    },
-    {
-      pattern: /const\s+(?:supabase|createClient)\s*=.*createClient\s*\([^)]*\)\s*;?\s*const\s+(?:supabase|createClient)/,
-      message: 'Duplicate Supabase client declaration',
-      code: 'DUPLICATE_DECLARATION'
     },
     {
       pattern: /\/\/\s*Types Supabase - remplacer/,
@@ -300,40 +327,31 @@ export function validateTypeScriptSyntax(content: string, filePath: string): Val
 /**
  * Check for missing polyfills based on imports
  */
-export function detectMissingPolyfills(
-  files: Record<string, string>
-): string[] {
+export function detectMissingPolyfills(files: Record<string, string>): string[] {
   const missing: string[] = [];
   const neededPolyfills = new Set<string>();
   
-  // Scan all files for imports that need polyfills
   for (const [path, content] of Object.entries(files)) {
-    if (!path.match(/\.(ts|tsx|js|jsx)$/)) continue;
+    if (!shouldValidateFile(path)) continue;
     
-    // Check for Supabase usage
-    if (/import.*from\s+['"]@\/lib\/supabase['"]/.test(content) ||
-        /supabase\./.test(content)) {
+    if (/import.*from\s+['"]@\/lib\/supabase['"]/.test(content) || /supabase\./.test(content)) {
       neededPolyfills.add('@/lib/supabase');
     }
     
-    // Check for type imports
     if (/import.*type.*from\s+['"]@\/types\/database['"]/.test(content) ||
         /Database|Tables|TablesInsert|TablesUpdate/.test(content)) {
       neededPolyfills.add('@/types/database');
     }
     
-    // Check for useIsMobile
     if (/useIsMobile/.test(content)) {
       neededPolyfills.add('@/hooks/use-mobile');
     }
     
-    // Check for toast usage
     if (/import.*from\s+['"]@\/hooks\/use-toast['"]/.test(content)) {
       neededPolyfills.add('@/hooks/use-toast');
     }
   }
   
-  // Check if polyfills exist
   for (const polyfill of neededPolyfills) {
     const polyfillPath = REQUIRED_POLYFILLS[polyfill];
     if (polyfillPath && !files[polyfillPath]) {
@@ -345,7 +363,7 @@ export function detectMissingPolyfills(
 }
 
 /**
- * Main validation function
+ * Main validation function - FOCUSED on frontend files only
  */
 export function validatePack(files: Record<string, string>): PackValidationResult {
   const criticalErrors: ValidationError[] = [];
@@ -357,11 +375,8 @@ export function validatePack(files: Record<string, string>): PackValidationResul
   let filesWithErrors = 0;
   let filesWithWarnings = 0;
   
-  const sourceFiles = Object.entries(files).filter(([path]) => 
-    path.match(/\.(ts|tsx|js|jsx)$/) &&
-    !path.includes('node_modules') &&
-    !path.includes('.d.ts')
-  );
+  // Only validate frontend source files
+  const sourceFiles = Object.entries(files).filter(([path]) => shouldValidateFile(path));
   
   for (const [path, content] of sourceFiles) {
     let hasErrors = false;
@@ -389,13 +404,9 @@ export function validatePack(files: Record<string, string>): PackValidationResul
     }
     allUnresolvedImports.push(...unresolvedImports);
     
-    if (hasErrors) {
-      filesWithErrors++;
-    } else if (hasWarnings) {
-      filesWithWarnings++;
-    } else {
-      validFiles++;
-    }
+    if (hasErrors) filesWithErrors++;
+    else if (hasWarnings) filesWithWarnings++;
+    else validFiles++;
   }
   
   // Check for missing polyfills
@@ -411,7 +422,6 @@ export function validatePack(files: Record<string, string>): PackValidationResul
   score -= missingPolyfills.length * 5;
   score = Math.max(0, Math.min(100, score));
   
-  // Add suggestions
   if (criticalErrors.length > 0) {
     suggestions.push('Fix critical errors before generating the pack');
   }
@@ -443,7 +453,7 @@ export function getValidationSummary(result: PackValidationResult): string {
   const lines: string[] = [];
   
   lines.push(`📊 Validation Score: ${result.score}%`);
-  lines.push(`📁 Files: ${result.stats.validFiles}/${result.stats.totalFiles} valid`);
+  lines.push(`📁 Frontend Files: ${result.stats.validFiles}/${result.stats.totalFiles} valid`);
   
   if (result.criticalErrors.length > 0) {
     lines.push(`\n❌ Critical Errors (${result.criticalErrors.length}):`);

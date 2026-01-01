@@ -12,6 +12,7 @@ import { admin_list_usersRouter } from './routes/admin_list_users';
 import { admin_manage_subscriptionRouter } from './routes/admin_manage_subscription';
 import { admin_manage_testerRouter } from './routes/admin_manage_tester';
 import { admin_signout_allRouter } from './routes/admin_signout_all';
+import { auditRouter } from './routes/audit';
 import { auto_configure_coolify_appRouter } from './routes/auto_configure_coolify_app';
 import { auto_fix_dockerfileRouter } from './routes/auto_fix_dockerfile';
 import { auto_restart_containerRouter } from './routes/auto_restart_container';
@@ -35,6 +36,7 @@ import { deploy_directRouter } from './routes/deploy_direct';
 import { deploy_ftpRouter } from './routes/deploy_ftp';
 import { detect_missing_env_varsRouter } from './routes/detect_missing_env_vars';
 import { diff_cleanRouter } from './routes/diff_clean';
+import { download_liberationRouter } from './routes/download_liberation';
 import { encrypt_secretsRouter } from './routes/encrypt_secrets';
 import { estimate_cleaning_costRouter } from './routes/estimate_cleaning_cost';
 import { export_dataRouter } from './routes/export_data';
@@ -46,7 +48,6 @@ import { fetch_github_repoRouter } from './routes/fetch_github_repo';
 import { fofy_chatRouter } from './routes/fofy_chat';
 import { generate_archiveRouter } from './routes/generate_archive';
 import { generate_docker_alternativesRouter } from './routes/generate_docker_alternatives';
-import { generate_liberation_packRouter } from './routes/generate_liberation_pack';
 import { get_coolify_app_detailsRouter } from './routes/get_coolify_app_details';
 import { get_user_creditsRouter } from './routes/get_user_credits';
 import { github_sync_webhookRouter } from './routes/github_sync_webhook';
@@ -54,6 +55,7 @@ import { global_resetRouter } from './routes/global_reset';
 import { health_monitorRouter } from './routes/health_monitor';
 import { import_data_to_supabaseRouter } from './routes/import_data_to_supabase';
 import { inspect_github_repoRouter } from './routes/inspect_github_repo';
+import { liberateRouter } from './routes/liberate';
 import { list_github_reposRouter } from './routes/list_github_repos';
 import { migrate_db_schemaRouter } from './routes/migrate_db_schema';
 import { migrate_encrypted_secretsRouter } from './routes/migrate_encrypted_secrets';
@@ -137,6 +139,7 @@ app.use('/api/admin-list-users', admin_list_usersRouter);
 app.use('/api/admin-manage-subscription', admin_manage_subscriptionRouter);
 app.use('/api/admin-manage-tester', admin_manage_testerRouter);
 app.use('/api/admin-signout-all', admin_signout_allRouter);
+app.use('/api/audit', auditRouter);
 app.use('/api/auto-configure-coolify-app', auto_configure_coolify_appRouter);
 app.use('/api/auto-fix-dockerfile', auto_fix_dockerfileRouter);
 app.use('/api/auto-restart-container', auto_restart_containerRouter);
@@ -160,6 +163,7 @@ app.use('/api/deploy-direct', deploy_directRouter);
 app.use('/api/deploy-ftp', deploy_ftpRouter);
 app.use('/api/detect-missing-env-vars', detect_missing_env_varsRouter);
 app.use('/api/diff-clean', diff_cleanRouter);
+app.use('/api/download-liberation', download_liberationRouter);
 app.use('/api/encrypt-secrets', encrypt_secretsRouter);
 app.use('/api/estimate-cleaning-cost', estimate_cleaning_costRouter);
 app.use('/api/export-data', export_dataRouter);
@@ -171,7 +175,6 @@ app.use('/api/fetch-github-repo', fetch_github_repoRouter);
 app.use('/api/fofy-chat', fofy_chatRouter);
 app.use('/api/generate-archive', generate_archiveRouter);
 app.use('/api/generate-docker-alternatives', generate_docker_alternativesRouter);
-app.use('/api/generate-liberation-pack', generate_liberation_packRouter);
 app.use('/api/get-coolify-app-details', get_coolify_app_detailsRouter);
 app.use('/api/get-user-credits', get_user_creditsRouter);
 app.use('/api/github-sync-webhook', github_sync_webhookRouter);
@@ -179,6 +182,7 @@ app.use('/api/global-reset', global_resetRouter);
 app.use('/api/health-monitor', health_monitorRouter);
 app.use('/api/import-data-to-supabase', import_data_to_supabaseRouter);
 app.use('/api/inspect-github-repo', inspect_github_repoRouter);
+app.use('/api/liberate', liberateRouter);
 app.use('/api/list-github-repos', list_github_reposRouter);
 app.use('/api/migrate-db-schema', migrate_db_schemaRouter);
 app.use('/api/migrate-encrypted-secrets', migrate_encrypted_secretsRouter);
@@ -227,7 +231,7 @@ app.use((req, res) => {
   res.status(404).json({ 
     error: 'Not found',
     path: req.path,
-    availableRoutes: ['/api/admin-list-payments', '/api/admin-list-subscriptions', '/api/admin-list-users', '/api/admin-manage-subscription', '/api/admin-manage-tester', '/api/admin-signout-all', '/api/auto-configure-coolify-app', '/api/auto-fix-dockerfile', '/api/auto-restart-container', '/api/check-deployment-status', '/api/check-deployment', '/api/check-server-status', '/api/check-subscription', '/api/clean-code', '/api/cleanup-coolify-orphans', '/api/cleanup-secrets', '/api/cleanup-storage', '/api/compare-dockerfile', '/api/configure-database', '/api/convert-edge-to-backend', '/api/create-checkout', '/api/create-liberation-checkout', '/api/customer-portal', '/api/decrypt-secret', '/api/deploy-coolify', '/api/deploy-direct', '/api/deploy-ftp', '/api/detect-missing-env-vars', '/api/diff-clean', '/api/encrypt-secrets', '/api/estimate-cleaning-cost', '/api/export-data', '/api/export-schema', '/api/export-to-github', '/api/export-user-data', '/api/extract-rls-policies', '/api/fetch-github-repo', '/api/fofy-chat', '/api/generate-archive', '/api/generate-docker-alternatives', '/api/generate-liberation-pack', '/api/get-coolify-app-details', '/api/get-user-credits', '/api/github-sync-webhook', '/api/global-reset', '/api/health-monitor', '/api/import-data-to-supabase', '/api/inspect-github-repo', '/api/list-github-repos', '/api/migrate-db-schema', '/api/migrate-encrypted-secrets', '/api/migrate-schema', '/api/network-diagnostic', '/api/pipeline-diagnostic', '/api/pipeline-health-check', '/api/pre-deploy-check', '/api/process-project-liberation', '/api/provision-hetzner-vps', '/api/purge-coolify-cache', '/api/purge-server-deployments', '/api/rate-limit-newsletter', '/api/recover-server-credentials', '/api/rolling-update', '/api/save-admin-coolify-config', '/api/send-email', '/api/send-liberation-report', '/api/send-liberation-success', '/api/send-newsletter-welcome', '/api/send-onboarding-reminder', '/api/send-otp', '/api/send-phone-otp', '/api/send-reminder-emails', '/api/send-welcome-email', '/api/serve-setup-script', '/api/setup-callback', '/api/setup-database', '/api/setup-vps', '/api/sovereign-liberation', '/api/stripe-webhook', '/api/sync-coolify-status', '/api/test-coolify-connection', '/api/use-credit', '/api/validate-api-key', '/api/validate-coolify-token', '/api/validate-github-repo', '/api/validate-supabase-destination', '/api/verify-otp', '/api/verify-phone-otp', '/api/verify-zero-shadow-door', '/api/widget-auth']
+    availableRoutes: ['/api/admin-list-payments', '/api/admin-list-subscriptions', '/api/admin-list-users', '/api/admin-manage-subscription', '/api/admin-manage-tester', '/api/admin-signout-all', '/api/audit', '/api/auto-configure-coolify-app', '/api/auto-fix-dockerfile', '/api/auto-restart-container', '/api/check-deployment-status', '/api/check-deployment', '/api/check-server-status', '/api/check-subscription', '/api/clean-code', '/api/cleanup-coolify-orphans', '/api/cleanup-secrets', '/api/cleanup-storage', '/api/compare-dockerfile', '/api/configure-database', '/api/convert-edge-to-backend', '/api/create-checkout', '/api/create-liberation-checkout', '/api/customer-portal', '/api/decrypt-secret', '/api/deploy-coolify', '/api/deploy-direct', '/api/deploy-ftp', '/api/detect-missing-env-vars', '/api/diff-clean', '/api/download-liberation', '/api/encrypt-secrets', '/api/estimate-cleaning-cost', '/api/export-data', '/api/export-schema', '/api/export-to-github', '/api/export-user-data', '/api/extract-rls-policies', '/api/fetch-github-repo', '/api/fofy-chat', '/api/generate-archive', '/api/generate-docker-alternatives', '/api/get-coolify-app-details', '/api/get-user-credits', '/api/github-sync-webhook', '/api/global-reset', '/api/health-monitor', '/api/import-data-to-supabase', '/api/inspect-github-repo', '/api/liberate', '/api/list-github-repos', '/api/migrate-db-schema', '/api/migrate-encrypted-secrets', '/api/migrate-schema', '/api/network-diagnostic', '/api/pipeline-diagnostic', '/api/pipeline-health-check', '/api/pre-deploy-check', '/api/process-project-liberation', '/api/provision-hetzner-vps', '/api/purge-coolify-cache', '/api/purge-server-deployments', '/api/rate-limit-newsletter', '/api/recover-server-credentials', '/api/rolling-update', '/api/save-admin-coolify-config', '/api/send-email', '/api/send-liberation-report', '/api/send-liberation-success', '/api/send-newsletter-welcome', '/api/send-onboarding-reminder', '/api/send-otp', '/api/send-phone-otp', '/api/send-reminder-emails', '/api/send-welcome-email', '/api/serve-setup-script', '/api/setup-callback', '/api/setup-database', '/api/setup-vps', '/api/sovereign-liberation', '/api/stripe-webhook', '/api/sync-coolify-status', '/api/test-coolify-connection', '/api/use-credit', '/api/validate-api-key', '/api/validate-coolify-token', '/api/validate-github-repo', '/api/validate-supabase-destination', '/api/verify-otp', '/api/verify-phone-otp', '/api/verify-zero-shadow-door', '/api/widget-auth']
   });
 });
 
@@ -250,6 +254,7 @@ app.listen(PORT, () => {
   console.log(`   - /api/admin-manage-subscription`);
   console.log(`   - /api/admin-manage-tester`);
   console.log(`   - /api/admin-signout-all`);
+  console.log(`   - /api/audit`);
   console.log(`   - /api/auto-configure-coolify-app`);
   console.log(`   - /api/auto-fix-dockerfile`);
   console.log(`   - /api/auto-restart-container`);
@@ -273,6 +278,7 @@ app.listen(PORT, () => {
   console.log(`   - /api/deploy-ftp`);
   console.log(`   - /api/detect-missing-env-vars`);
   console.log(`   - /api/diff-clean`);
+  console.log(`   - /api/download-liberation`);
   console.log(`   - /api/encrypt-secrets`);
   console.log(`   - /api/estimate-cleaning-cost`);
   console.log(`   - /api/export-data`);
@@ -284,7 +290,6 @@ app.listen(PORT, () => {
   console.log(`   - /api/fofy-chat`);
   console.log(`   - /api/generate-archive`);
   console.log(`   - /api/generate-docker-alternatives`);
-  console.log(`   - /api/generate-liberation-pack`);
   console.log(`   - /api/get-coolify-app-details`);
   console.log(`   - /api/get-user-credits`);
   console.log(`   - /api/github-sync-webhook`);
@@ -292,6 +297,7 @@ app.listen(PORT, () => {
   console.log(`   - /api/health-monitor`);
   console.log(`   - /api/import-data-to-supabase`);
   console.log(`   - /api/inspect-github-repo`);
+  console.log(`   - /api/liberate`);
   console.log(`   - /api/list-github-repos`);
   console.log(`   - /api/migrate-db-schema`);
   console.log(`   - /api/migrate-encrypted-secrets`);

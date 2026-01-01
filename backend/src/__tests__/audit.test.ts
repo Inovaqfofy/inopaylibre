@@ -1,17 +1,17 @@
 import request from 'supertest';
 import express from 'express';
-import { generate_liberation_packRouter } from './generate_liberation_pack';
+import { auditRouter } from './audit';
 
 const app = express();
 app.use(express.json());
-app.use('/api/generate-liberation-pack', generate_liberation_packRouter);
+app.use('/api/audit', auditRouter);
 
-describe('generate-liberation-pack route', () => {
+describe('audit route', () => {
 
-  describe('POST /api/generate-liberation-pack', () => {
+  describe('POST /api/audit', () => {
     it('should respond successfully', async () => {
       const response = await request(app)
-        .post('/api/generate-liberation-pack')
+        .post('/api/audit')
         .send({ test: true })
         .set('Authorization', 'Bearer test-token');
       
@@ -20,7 +20,7 @@ describe('generate-liberation-pack route', () => {
 
     it('should require authentication', async () => {
       const response = await request(app)
-        .post('/api/generate-liberation-pack')
+        .post('/api/audit')
         .send({ test: true });
       
       expect(response.status).toBe(401);

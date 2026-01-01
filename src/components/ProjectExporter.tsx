@@ -230,8 +230,8 @@ const ProjectExporter = ({
       setProgress((i / totalFiles) * 50);
 
       const needsCleaning = 
-        content.includes('@lovable') || 
-        content.includes('@gptengineer') ||
+        content.includes('@[PLATFORM]') || 
+        content.includes('@[PLATFORM]') ||
         content.includes('use-mobile') ||
         content.includes("");
 

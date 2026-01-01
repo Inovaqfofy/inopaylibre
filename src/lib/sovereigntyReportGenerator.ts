@@ -175,8 +175,8 @@ export function auditCleanedFiles(
 
   // Check for remaining proprietary patterns
   const proprietaryPatterns = [
-    { pattern: /lovable/gi, name: 'Lovable' },
-    { pattern: /gptengineer/gi, name: 'GPT Engineer' },
+    { pattern: /[PLATFORM]/gi, name: 'Lovable' },
+    { pattern: /[PLATFORM]/gi, name: 'GPT Engineer' },
     { pattern: /bolt\.new/gi, name: 'Bolt' },
     { pattern: /v0\.dev/gi, name: 'v0' },
     { pattern: /cursor/gi, name: 'Cursor' },

@@ -1,7 +1,7 @@
 {
   "isProductionReady": false,
   "overallScore": 60,
-  "timestamp": "2025-12-31T23:13:14.313Z",
+  "timestamp": "2026-01-01T19:22:08.474Z",
   "projectName": "inopay",
   "checklist": {
     "build": {
@@ -9,10 +9,13 @@
       "details": [
         "✅ Script build présent",
         "✅ Script start/preview présent",
-        "✅ 69 dépendances déclarées",
+        "✅ 71 dépendances déclarées",
         "✅ Script build présent",
         "✅ Script start/preview présent",
-        "✅ 12 dépendances déclarées"
+        "✅ 12 dépendances déclarées",
+        "✅ Script build présent",
+        "✅ Script start/preview présent",
+        "✅ 6 dépendances déclarées"
       ],
       "score": 100
     },
@@ -74,11 +77,11 @@
     }
   },
   "criticalBlockers": [
-    "6 secrets codés en dur détectés",
+    "1 secrets codés en dur détectés",
     "Usage de eval() détecté - risque d'injection"
   ],
   "warnings": [
-    "116 console.log à retirer pour la production"
+    "172 console.log à retirer pour la production"
   ],
   "recommendations": [
     "Créer .env.example pour documenter les variables"
@@ -86,7 +89,7 @@
   "certifications": {
     "coolifyReady": true,
     "dockerReady": true,
-    "sovereigntyCompliant": false,
+    "sovereigntyCompliant": true,
     "securityAudited": false
   }
 }

@@ -68,8 +68,8 @@ export interface BuildValidationReport {
 
 // Known proprietary patterns that would cause build failures
 const PROPRIETARY_IMPORTS = [
-  /@lovable\//,
-  /@gptengineer\//,
+  /@[PLATFORM]\//,
+  /@[PLATFORM]\//,
   /from ['"]lovable/,
   /from ['"]gptengineer/,
   /lovable-tagger/];
@@ -84,9 +84,9 @@ const REQUIRED_DEPENDENCIES = [
 
 // Known proprietary dependencies
 const PROPRIETARY_DEPS = [
-  'lovable-tagger',
-  '@lovable/core',
-  '@gptengineer/core'];
+  '[PLATFORM]-tagger',
+  '@[PLATFORM]/core',
+  '@[PLATFORM]/core'];
 
 export function BuildValidator({ 
   files, 
@@ -186,9 +186,8 @@ export function BuildValidator({
           }
         }
 
-        // Check all dependencies for lovable/gptengineer references
-        for (const [name, version] of Object.entries(allDeps)) {
-          if (name.includes('lovable') || name.includes('gptengineer')) {
+                for (const [name, version] of Object.entries(allDeps)) {
+          if (name.includes('[PLATFORM]') || name.includes('[PLATFORM]')) {
             if (!dependencyChecks.find(d => d.name === name)) {
               dependencyChecks.push({
                 name,

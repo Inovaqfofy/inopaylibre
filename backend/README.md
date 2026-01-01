@@ -4,8 +4,8 @@
 
 | Métrique | Valeur |
 |----------|--------|
-| Edge Functions converties | 90 |
-| Routes générées | 90 |
+| Edge Functions converties | 92 |
+| Routes générées | 92 |
 | Taux de préservation moyen | 100% |
 
 ## 🚀 Démarrage rapide
@@ -24,6 +24,7 @@ npm run dev
 - `/api/admin-manage-subscription`
 - `/api/admin-manage-tester`
 - `/api/admin-signout-all`
+- `/api/audit`
 - `/api/auto-configure-coolify-app`
 - `/api/auto-fix-dockerfile`
 - `/api/auto-restart-container`
@@ -47,6 +48,7 @@ npm run dev
 - `/api/deploy-ftp`
 - `/api/detect-missing-env-vars`
 - `/api/diff-clean`
+- `/api/download-liberation`
 - `/api/encrypt-secrets`
 - `/api/estimate-cleaning-cost`
 - `/api/export-data`
@@ -58,7 +60,6 @@ npm run dev
 - `/api/fofy-chat`
 - `/api/generate-archive`
 - `/api/generate-docker-alternatives`
-- `/api/generate-liberation-pack`
 - `/api/get-coolify-app-details`
 - `/api/get-user-credits`
 - `/api/github-sync-webhook`
@@ -66,6 +67,7 @@ npm run dev
 - `/api/health-monitor`
 - `/api/import-data-to-supabase`
 - `/api/inspect-github-repo`
+- `/api/liberate`
 - `/api/list-github-repos`
 - `/api/migrate-db-schema`
 - `/api/migrate-encrypted-secrets`

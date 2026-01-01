@@ -1,0 +1,58 @@
+{
+  "name": "@inopay/cli",
+  "version": "2.0.0",
+  "description": "InoPay Liberator CLI - Libérez vos projets propriétaires",
+  "bin": {
+    "inopay": "./bin/inopay.js"
+  },
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "liberate": "tsx src/index.ts liberate",
+    "audit": "tsx src/index.ts audit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "inopay",
+    "liberator",
+    "sovereign",
+    "[PLATFORM]",
+    "migration",
+    "cli",
+    "code-cleaner",
+    "proprietary-removal"
+  ],
+  "author": "Inovaq Canada Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.0",
+    "archiver": "^7.0.0",
+    "inquirer": "^9.2.0",
+    "glob": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/archiver": "^6.0.0",
+    "@types/inquirer": "^9.0.0",
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inopay/cli"
+  },
+  "homepage": "https://inopay.app/cli",
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ]
+}

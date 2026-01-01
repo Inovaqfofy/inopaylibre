@@ -182,16 +182,16 @@ const LiberationReport = () => {
     // Default services if none provided
     if (servicesReplaced.length === 0) {
       servicesReplaced = [
-        { from: "Lovable Hosting", to: "Self-hosted VPS", savings: 50 },
-        { from: "@lovable/ui-kit", to: "shadcn/ui", savings: 0 },
-        { from: "lovable-tagger", to: "Supprimé", savings: 0 }
+        { from: "[PLATFORM] Hosting", to: "Self-hosted VPS", savings: 50 },
+        { from: "@[PLATFORM]/ui-kit", to: "shadcn/ui", savings: 0 },
+        { from: "[PLATFORM]-tagger", to: "Supprimé", savings: 0 }
       ];
     }
 
     // Default cleaned dependencies
     const cleanedDeps = dep.cleaned_dependencies && dep.cleaned_dependencies.length > 0
       ? dep.cleaned_dependencies
-      : ["@lovable/ui-kit", "@gptengineer/core", "lovable-tagger"];
+      : ["@[PLATFORM]/ui-kit", "@[PLATFORM]/core", "[PLATFORM]-tagger"];
 
     return {
       projectName: dep.project_name,

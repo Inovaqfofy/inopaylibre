@@ -111,7 +111,7 @@ const NEXT_STEPS = [
   {
     icon: <Download className="h-5 w-5" />,
     title: "1. Importez votre projet",
-    description: "Uploadez votre ZIP Lovable depuis le dashboard",
+    description: "Uploadez votre ZIP [PLATFORM] depuis le dashboard",
     link: "/dashboard",
     action: "Aller au dashboard",
   },

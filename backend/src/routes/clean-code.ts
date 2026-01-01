@@ -21,7 +21,7 @@ Règles spécifiques:
 - Remplace @lovable/ et @gptengineer/ imports par des alternatives open-source
 - Remplace use-mobile par un hook personnalisé utilisant window.matchMedia
 - Remplace use-toast par react-hot-toast ou sonner
-- Supprime les fichiers de configuration .lovable, .gptengineer
+- Supprime les fichiers de configuration .[PLATFORM], .[PLATFORM]
 - Garde les alias @/ mais documente comment les configurer dans vite.config.ts
 - Conserve la structure et la logique du code original
 - Retourne UNIQUEMENT le code nettoyé, sans explication`;
@@ -62,7 +62,7 @@ cleanCodeRouter.post('/', authMiddleware, async (req: AuthRequest, res: Response
     let cleanedCode: string;
 
     if (apiProvider === 'anthropic') {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://${OLLAMA_BASE_URL}/v1/messages', {
         method: 'POST',
         headers: {
           'x-api-key': apiKey,

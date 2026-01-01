@@ -39,8 +39,7 @@ interface AssetDownloaderProps {
 
 // URL patterns to detect
 const ASSET_URL_PATTERNS = [
-  // Lovable project URLs
-  /https?:\/\/[a-z0-9-]+\.lovableproject\.com[^'\s)]+\.(png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|eot)/gi,
+    /https?:\/\/[a-z0-9-]+\.lovableproject\.com[^'\s)]+\.(png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|eot)/gi,
   // Supabase storage URLs
   /https?:\/\/[a-z0-9]+\.supabase\.co\/storage\/v1\/object\/[^'\s)]+/gi,
   // Generic CDN patterns

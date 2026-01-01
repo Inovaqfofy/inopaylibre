@@ -94,13 +94,6 @@
       "fix": "Ne loggez jamais de données sensibles"
     },
     {
-      "category": "A07_IdentificationFailures",
-      "severity": "medium",
-      "file": "src/lib/clientProprietaryPatterns.ts",
-      "description": "Mot de passe faible potentiel",
-      "fix": "Exigez des mots de passe forts"
-    },
-    {
       "category": "A02_CryptographicFailures",
       "severity": "medium",
       "file": "src/lib/completeLiberationGuide.ts",
@@ -192,6 +185,13 @@
       "fix": "Utilisez textContent ou sanitisez"
     },
     {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "src/lib/projectRebuilder.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
+    },
+    {
       "category": "A09_SecurityLogging",
       "severity": "high",
       "file": "src/lib/selfHostedAuthTemplate.ts",
@@ -208,16 +208,30 @@
     {
       "category": "A09_SecurityLogging",
       "severity": "high",
+      "file": "backend/src/middleware/rateLimiter.ts",
+      "description": "Log de données sensibles",
+      "fix": "Ne loggez jamais de données sensibles"
+    },
+    {
+      "category": "A09_SecurityLogging",
+      "severity": "high",
       "file": "backend/src/routes/generate-archive.ts",
       "description": "Log de données sensibles",
       "fix": "Ne loggez jamais de données sensibles"
+    },
+    {
+      "category": "A02_CryptographicFailures",
+      "severity": "medium",
+      "file": "cli/src/index.ts",
+      "description": "Connexion non-HTTPS",
+      "fix": "Utilisez HTTPS pour toutes les connexions"
     }
   ],
   "summary": {
-    "total": 30,
+    "total": 32,
     "critical": 2,
-    "high": 10,
-    "medium": 18,
+    "high": 11,
+    "medium": 19,
     "low": 0
   }
 }

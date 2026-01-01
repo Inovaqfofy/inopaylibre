@@ -461,9 +461,24 @@ interface CleaningStats {
                   files={cleanedFiles}
                   onValidationComplete={(isValid, errors) => {
                     setIsCodeValid(isValid);
-                    if (!isValid) {
-                      toast.warning(`${errors.filter(e => e.severity === 'error').length} erreurs détectées`);
+                    // Only show toast for actual frontend errors
+                    const frontendErrors = errors.filter(e => 
+                      e.severity === 'error' && 
+                      e.category !== 'backend' && 
+                      e.category !== 'tooling'
+                    );
+                    if (frontendErrors.length > 0) {
+                      toast.warning(`${frontendErrors.length} erreur${frontendErrors.length > 1 ? 's' : ''} frontend`);
+                    } else if (isValid) {
+                      toast.success('Validation frontend réussie');
                     }
+                  }}
+                  onAutoFix={(fixedFiles) => {
+                    setCleanedFiles(fixedFiles);
+                  }}
+                  onContinueAnyway={() => {
+                    setIsCodeValid(true);
+                    toast.info('Validation ignorée - procédez avec précaution');
                   }}
                 />
               </TabsContent>
@@ -986,6 +1001,25 @@ interface CleaningStats {
                         </AlertDescription>
                       </Alert>
                     )}
+                    {!isCodeValid && cleaningStats.sovereigntyScore >= 50 && (
+                      <Alert className="border-yellow-500/30 bg-yellow-500/10">
+                        <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                        <AlertDescription className="text-yellow-700">
+                          Des erreurs ont été détectées lors de la validation. 
+                          <button 
+                            onClick={() => {
+                              const tabsList = document.querySelector('[value="validate"]');
+                              if (tabsList) {
+                                (tabsList as HTMLButtonElement).click();
+                              }
+                            }}
+                            className="ml-1 underline hover:no-underline font-medium"
+                          >
+                            Voir l'onglet Validation
+                          </button>
+                        </AlertDescription>
+                      </Alert>
+                    )}
                     <Button 
                       onClick={handleGeneratePack} 
                       disabled={isGeneratingPack || cleaningStats.sovereigntyScore < 50}
@@ -1001,9 +1035,20 @@ interface CleaningStats {
                         <>
                           <Package className="h-5 w-5" />
                           Générer le Liberation Pack
+                          {!isCodeValid && (
+                            <Badge variant="outline" className="ml-2 bg-yellow-500/10 text-yellow-600 border-yellow-500/30">
+                              ⚠️
+                            </Badge>
+                          )}
                         </>
                       )}
                     </Button>
+                    {!isCodeValid && (
+                      <p className="text-xs text-muted-foreground text-center max-w-md">
+                        Le pack sera généré malgré les erreurs de validation. 
+                        Vous pouvez corriger les problèmes via l'onglet Validation.
+                      </p>
+                    )}
                   </div>
                 )}
               </CardContent>

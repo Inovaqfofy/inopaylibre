@@ -28,32 +28,14 @@
         "remediation": "Validez strictement les entrées"
       },
       {
-        "severity": "critical",
-        "file": "src/lib/clientProprietaryPatterns.ts",
-        "description": "eval() - Exécution de code arbitraire",
-        "remediation": "Utilisez JSON.parse()"
-      },
-      {
-        "severity": "critical",
-        "file": "src/lib/clientProprietaryPatterns.ts",
-        "description": "new Function() - Code dynamique",
-        "remediation": "Évitez la création dynamique"
-      },
-      {
         "severity": "high",
-        "file": "src/lib/clientProprietaryPatterns.ts",
+        "file": "src/lib/edgeFunctionParser.ts",
         "description": "exec() - Commandes système",
         "remediation": "Validez strictement les entrées"
       },
       {
         "severity": "high",
-        "file": "src/lib/clientProprietaryPatterns.ts",
-        "description": "child_process - Spawn de processus",
-        "remediation": "Limitez et validez"
-      },
-      {
-        "severity": "high",
-        "file": "src/lib/edgeFunctionParser.ts",
+        "file": "src/lib/lovableCleanerEngine.ts",
         "description": "exec() - Commandes système",
         "remediation": "Validez strictement les entrées"
       },
@@ -86,6 +68,12 @@
         "file": "src/lib/rlsPolicyExtractor.ts",
         "description": "exec() - Commandes système",
         "remediation": "Validez strictement les entrées"
+      },
+      {
+        "severity": "high",
+        "file": "backend/src/middleware/inputValidator.ts",
+        "description": "exec() - Commandes système",
+        "remediation": "Validez strictement les entrées"
       }
     ],
     "suspiciousDNS": [],
@@ -112,5 +100,5 @@
     ],
     "backdoors": []
   },
-  "summary": "⚠️ 17 problème(s) de sécurité"
+  "summary": "⚠️ 15 problème(s) de sécurité"
 }

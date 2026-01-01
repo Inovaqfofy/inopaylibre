@@ -370,7 +370,7 @@ const Settings = () => {
                 <p className="text-sm text-muted-foreground">
                   {t("settings.getKeyAt")}{" "}
                   {settings.api_provider === "openai" 
-                    ? "platform.openai.com" 
+                    ? "platform.${OLLAMA_BASE_URL}" 
                     : settings.api_provider === "anthropic"
                     ? "console.anthropic.com"
                     : "platform.deepseek.com"}

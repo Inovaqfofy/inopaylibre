@@ -1,13 +1,13 @@
 {
   "version": "2.0",
-  "generatedAt": "2025-12-31T23:13:14.308Z",
+  "generatedAt": "2026-01-01T19:22:08.439Z",
   "projectName": "inopay",
-  "totalFilesProcessed": 318,
+  "totalFilesProcessed": 346,
   "totalFilesModified": 0,
   "phases": {
     "ingestion": {
       "status": "completed",
-      "filesExtracted": 318
+      "filesExtracted": 346
     },
     "proprietaryScan": {
       "status": "completed",
@@ -15,7 +15,7 @@
     },
     "astAnalysis": {
       "status": "completed",
-      "dependenciesAnalyzed": 20
+      "dependenciesAnalyzed": 11
     },
     "rewriting": {
       "status": "completed",
@@ -31,12 +31,12 @@
     },
     "packGeneration": {
       "status": "completed",
-      "routesConverted": 90
+      "routesConverted": 92
     },
     "validation": {
       "status": "completed",
       "dockerValidated": true,
-      "testsGenerated": 281
+      "testsGenerated": 284
     }
   },
   "transformations": [
@@ -49,5 +49,5 @@
       "description": "src/components/SovereignExport.tsx: Clé Stripe live exposée"
     }
   ],
-  "summary": "Pack de libération NCS v2.0 généré avec 90 routes backend, 191 composants testés"
+  "summary": "Pack de libération NCS v2.0 généré avec 92 routes backend, 192 composants testés"
 }

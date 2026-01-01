@@ -145,9 +145,9 @@ PBKDF2: 100,000 itérations avec SHA-256
 
 | Plateforme | Patterns | Statut |
 |------------|----------|--------|
-| **Lovable** | @lovable/, lovable-tagger, .lovable, cdn.lovable.dev | ✅ |
-| **GPT Engineer** | @gptengineer/, gpt-engineer, .gptengineer | ✅ |
-| **Bolt** | @bolt/, bolt.new, .bolt | ✅ |
+| **Lovable** | @lovable/, lovable-tagger, .lovable, cdn.[PLATFORM].dev | ✅ |
+| **GPT Engineer** | @gptengineer/, gpt-engineer, .[PLATFORM] | ✅ |
+| **Bolt** | @bolt/, [PLATFORM], .bolt | ✅ |
 | **v0 (Vercel)** | @v0/, v0.dev, .v0, v0-tagger | ✅ |
 | **Cursor** | @cursor/, cursor-sdk, .cursor | ✅ |
 | **Replit** | @replit/, .replit, replit.nix | ✅ |

@@ -2,7 +2,7 @@
   "wizard": {
     "secrets": {
       "title": "Mapping des Secrets",
-      "description": "Remplacez les clés API Lovable par vos propres clés privées",
+      "description": "Remplacez les clés API [PLATFORM] par vos propres clés privées",
       "detected": "détectés",
       "scanning": "Analyse des variables d'environnement...",
       "scanningFiles": "Scan de {{count}} fichiers",
@@ -236,7 +236,7 @@
     "subtitle": "Estimez vos économies annuelles avec le Plan Portfolio Inopay",
     "yourSituation": "Votre situation actuelle",
     "appCount": "Nombre d'applications",
-    "appCountHelp": "Apps Lovable, Bolt, Replit, etc.",
+    "appCountHelp": "Apps [PLATFORM], Bolt, Replit, etc.",
     "devHours": "Heures DevOps par semaine",
     "devHoursHelp": "Déploiements, debugging, configuration serveur",
     "monthlyCost": "Coût hosting mensuel par app",
@@ -316,7 +316,7 @@
     "titleLine1": "Gardez le Vibe.",
     "titleLine2": "Reprenez le Code.",
     "subtitle": "Du prototype IA à la vraie entreprise.",
-    "description": "Vous avez passé des nuits à itérer avec Lovable, Bolt ou Cursor. Vous avez créé quelque chose de grand.",
+    "description": "Vous avez passé des nuits à itérer avec [PLATFORM], Bolt ou Cursor. Vous avez créé quelque chose de grand.",
     "descriptionBold": "Inopay le rend libre.",
     "cta": "Libérer mon projet",
     "ctaSubtext": "Analyse gratuite, sans carte bancaire",
@@ -366,7 +366,7 @@
     },
     "realIP": {
       "title": "Propriété Intellectuelle Réelle",
-      "description": "Un code sur Lovable est emprunté. Un code Inopay sur votre VPS est un actif que vous pouvez revendre."
+      "description": "Un code sur [PLATFORM] est emprunté. Un code Inopay sur votre VPS est un actif que vous pouvez revendre."
     }
   },
   "faq": {
@@ -386,7 +386,7 @@
     },
     "q4": {
       "question": "Quelles plateformes IA sont compatibles ?",
-      "answer": "Lovable, Bolt, v0, Cursor, Replit et toutes les plateformes générant du code React/Vue/JavaScript moderne. Le nettoyage IA adapte le code à votre infrastructure."
+      "answer": "[PLATFORM], Bolt, v0, Cursor, Replit et toutes les plateformes générant du code React/Vue/JavaScript moderne. Le nettoyage IA adapte le code à votre infrastructure."
     }
   },
   "cta": {
@@ -462,7 +462,7 @@
       "batchImport": "Analysez plusieurs projets GitHub en une seule opération",
       "projects": "Gérez et déployez vos projets analysés",
       "deployChoice": "Choisissez votre méthode de déploiement",
-      "syncMirror": "Synchronisation automatique entre Lovable et votre serveur",
+      "syncMirror": "Synchronisation automatique entre [PLATFORM] et votre serveur",
       "deployments": "Historique de vos déploiements",
       "servers": "Gérez vos serveurs VPS et Coolify",
       "migration": "Exportez vos données pour migrer vers votre propre infrastructure",
@@ -797,7 +797,7 @@
   },
   "liberation": {
     "title": "Assistant de Libération",
-    "description": "Exportez votre projet Lovable vers votre propre compte GitHub",
+    "description": "Exportez votre projet [PLATFORM] vers votre propre compte GitHub",
     "restart": "Recommencer",
     "files": "fichiers",
     "modified": "modifiés",
@@ -828,7 +828,7 @@
   },
   "syncMirror": {
     "title": "Inopay Sync Mirror",
-    "subtitle": "Synchronisation automatique entre Lovable et votre serveur privé",
+    "subtitle": "Synchronisation automatique entre [PLATFORM] et votre serveur privé",
     "stats": {
       "configured": "Projets configurés",
       "active": "Sync actives",
@@ -845,10 +845,10 @@
     "noCompatibleDesc": "Pour utiliser Sync Mirror, vous devez d'abord déployer un projet via Coolify avec un dépôt GitHub lié.",
     "howItWorks": "Comment ça marche ?",
     "steps": {
-      "step1": "Modifiez sur Lovable",
+      "step1": "Modifiez sur [PLATFORM]",
       "step1Desc": "Codez par chat comme d'habitude",
       "step2": "Push vers GitHub",
-      "step2Desc": "Lovable synchronise automatiquement",
+      "step2Desc": "[PLATFORM] synchronise automatiquement",
       "step3": "Nettoyage intelligent",
       "step3Desc": "Inopay supprime les verrous",
       "step4": "Déploiement automatique",
@@ -1081,7 +1081,7 @@
   },
   "liberation": {
     "title": "Assistant de Libération",
-    "description": "Exportez votre projet Lovable vers votre propre compte GitHub",
+    "description": "Exportez votre projet [PLATFORM] vers votre propre compte GitHub",
     "restart": "Recommencer",
     "steps": {
       "source": "Source",
@@ -1094,10 +1094,10 @@
     "modified": "modifiés",
     "yourAccount": "Votre compte",
     "step1": {
-      "title": "Étape 1 : Connecter la source Lovable",
+      "title": "Étape 1 : Connecter la source [PLATFORM]",
       "alert": "Entrez l'URL du dépôt GitHub créé par Lovable pour votre projet. Tous les fichiers seront récupérés automatiquement.",
-      "repoUrl": "URL du dépôt Lovable",
-      "repoPlaceholder": "https://github.com/lovable-org/mon-projet",
+      "repoUrl": "URL du dépôt [PLATFORM]",
+      "repoPlaceholder": "https://github.com/[PLATFORM]-org/mon-projet",
       "tokenOptional": "Token (optionnel - dépôts privés)",
       "tokenPlaceholder": "ghp_... (uniquement si dépôt privé)",
       "fetchFiles": "Récupérer les fichiers",
@@ -1160,7 +1160,7 @@
       "byokDiscount": "Réduction 30% appliquée",
       "cleaning": "Nettoyage en cours...",
       "cleaningItems": {
-        "imports": "Suppression des imports lovable/gptengineer",
+        "imports": "Suppression des imports [PLATFORM]/[PLATFORM]",
         "hooks": "Remplacement des hooks propriétaires",
         "services": "Optimisation des services cloud → Open Source",
         "deps": "Mise à jour des dépendances",
@@ -1202,7 +1202,7 @@
   },
   "meta": {
     "title": "Inopay - Libérez votre code IA",
-    "description": "Passez du prototype IA à la vraie entreprise. Déployez votre code Lovable, Bolt ou Cursor sur votre propre VPS en 10 minutes."
+    "description": "Passez du prototype IA à la vraie entreprise. Déployez votre code [PLATFORM], Bolt ou Cursor sur votre propre VPS en 10 minutes."
   },
   "manifeste": {
     "badge": "Manifeste",
@@ -1230,7 +1230,7 @@
         "title": "Archive ZIP",
         "description": "Téléchargez votre projet nettoyé prêt à déployer manuellement",
         "badge": "Gratuit",
-        "features": ["Code nettoyé des dépendances Lovable", "Dockerfile inclus", "Instructions de déploiement", "Déploiement manuel requis"]
+        "features": ["Code nettoyé des dépendances [PLATFORM]", "Dockerfile inclus", "Instructions de déploiement", "Déploiement manuel requis"]
       },
       "ftp": {
         "title": "Hébergement mutualisé",
@@ -1260,14 +1260,14 @@
     "repoDescription": "Projet souverain exporté depuis Inopay - 100% autonome",
     "cleanMigrate": {
       "title": "Nettoyage & Migration",
-      "description": "Le code sera nettoyé des dépendances Lovable et le schéma sera migré vers votre Supabase",
+      "description": "Le code sera nettoyé des dépendances [PLATFORM] et le schéma sera migré vers votre Supabase",
       "githubDescription": "Le code nettoyé sera poussé sur votre compte",
       "supabaseDescription": "Le schéma DB sera migré vers votre instance",
       "action": "Nettoyer & Migrer"
     },
     "deploy": {
       "title": "Déploiement Souverain",
-      "description": "Flux: Code Lovable → Nettoyage Inopay → GitHub Client → Webhook Coolify → VPS",
+      "description": "Flux: Code [PLATFORM] → Nettoyage Inopay → GitHub Client → Webhook Coolify → VPS",
       "repoCreatedSuccess": "Dépôt créé avec succès",
       "schemaMigrated": "Schéma DB migré",
       "action": "Déployer sur mon VPS"
@@ -1303,22 +1303,22 @@
   "sovereignConnections": {
     "dualConnection": "Double connexion GitHub : Source → Destination",
     "githubSource": "GitHub SOURCE",
-    "githubSourceDesc": "votre projet Lovable actuel (lecture)",
+    "githubSourceDesc": "votre projet [PLATFORM] actuel (lecture)",
     "githubDestination": "GitHub DESTINATION",
     "githubDestinationDesc": "votre compte personnel où le code nettoyé sera exporté (écriture)",
-    "sourceLovable": "Source Lovable",
+    "sourceLovable": "Source [PLATFORM]",
     "cleaningInopay": "Nettoyage Inopay",
     "personalDestination": "Destination Personnelle",
-    "githubSourceTitle": "GitHub SOURCE (Lovable)",
-    "githubSourceCardDesc": "Le dépôt GitHub où se trouve votre projet Lovable original",
-    "lovableRepoUrl": "URL du dépôt Lovable",
+    "githubSourceTitle": "GitHub SOURCE ([PLATFORM])",
+    "githubSourceCardDesc": "Le dépôt GitHub où se trouve votre projet [PLATFORM] original",
+    "lovableRepoUrl": "URL du dépôt [PLATFORM]",
     "lovableRepoUrlHint": "L'URL du dépôt GitHub créé automatiquement par Lovable",
     "tokenOptional": "Token (optionnel - dépôts privés)",
     "sourceTokenConfigured": "Token source configuré",
     "testSource": "Tester la source",
     "githubDestinationTitle": "GitHub DESTINATION (Personnel)",
     "githubDestinationCardDesc": "Votre compte GitHub personnel où le code nettoyé sera exporté",
-    "destinationTokenInfo": "Ce token sera utilisé pour créer un nouveau dépôt sur votre propre compte GitHub et y pousser le code nettoyé, vous libérant ainsi de Lovable.",
+    "destinationTokenInfo": "Ce token sera utilisé pour créer un nouveau dépôt sur votre propre compte GitHub et y pousser le code nettoyé, vous libérant ainsi de [PLATFORM].",
     "patClassic": "Personal Access Token (Classic)",
     "exportTo": "Exportation vers",
     "createTokenLink": "Créer un token avec les permissions repo et workflow",
@@ -1511,7 +1511,7 @@
   },
   "liberation": {
     "title": "Assistant de Libération",
-    "description": "Exportez votre projet Lovable vers votre propre compte GitHub",
+    "description": "Exportez votre projet [PLATFORM] vers votre propre compte GitHub",
     "restart": "Nouveau projet",
     "files": "fichiers",
     "modified": "modifiés",
@@ -1530,7 +1530,7 @@
       "title": "Récupérer le code source",
       "description": "Entrez l'URL de votre dépôt GitHub Lovable. Pour les dépôts privés, ajoutez un Personal Access Token.",
       "urlLabel": "URL du dépôt GitHub",
-      "urlPlaceholder": "https://github.com/lovable-dev/mon-projet",
+      "urlPlaceholder": "https://github.com/[PLATFORM]-dev/mon-projet",
       "tokenLabel": "Token GitHub (optionnel, pour dépôts privés)",
       "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
       "fetchFiles": "Récupérer les fichiers"
@@ -1546,7 +1546,7 @@
     },
     "step3": {
       "title": "Configuration du moteur IA",
-      "description": "Choisissez le moteur IA pour nettoyer votre code des dépendances propriétaires Lovable.",
+      "description": "Choisissez le moteur IA pour nettoyer votre code des dépendances propriétaires [PLATFORM].",
       "inopayEngine": "Moteur Inopay",
       "inopayDesc": "Utilisez DeepSeek V3 avec fallback automatique sur Claude. Aucune configuration requise.",
       "fallbackInfo": "Fallback automatique sur Claude si DeepSeek est surchargé",
@@ -1565,7 +1565,7 @@
       "description": "{{count}} fichiers TypeScript/JavaScript à nettoyer.",
       "byokUsed": "Mode BYOK : utilisation de votre clé {{provider}}",
       "cleaningInProgress": "Nettoyage en cours...",
-      "task1": "Suppression des imports @lovable-dev",
+      "task1": "Suppression des imports @[PLATFORM]-dev",
       "task2": "Remplacement des composants propriétaires",
       "task3": "Nettoyage des références Supabase spécifiques",
       "task4": "Optimisation des imports React",
@@ -1867,11 +1867,11 @@
       "logs": {
         "init": "Initialisation du scanner de souveraineté...",
         "analyzing": "Analyse des dépendances propriétaires...",
-        "detecting": "Détection des patterns Lovable/Bolt...",
-        "removing": "Suppression de lovable-tagger...",
+        "detecting": "Détection des patterns [PLATFORM]/Bolt...",
+        "removing": "Suppression de [PLATFORM]-tagger...",
         "replacing": "Remplacement des hooks propriétaires...",
         "injecting": "Injection des polyfills souverains...",
-        "cleaningImports": "Nettoyage des imports @lovable-dev...",
+        "cleaningImports": "Nettoyage des imports @[PLATFORM]-dev...",
         "generating": "Génération du package.json souverain...",
         "validating": "Validation de la structure finale...",
         "calculating": "Calcul du score de souveraineté...",

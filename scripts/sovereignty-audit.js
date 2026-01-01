@@ -36,8 +36,7 @@ function checkViteConfig() {
       checks.noSourcemaps = true;
     }
     
-    // Vérifier que lovable-tagger est conditionnel
-    if (viteConfig.includes('mode !== "production"') || viteConfig.includes("mode !== 'production'")) {
+        if (viteConfig.includes('mode !== "production"') || viteConfig.includes("mode !== 'production'")) {
       checks.conditionalTagger = true;
     }
   } catch (err) {

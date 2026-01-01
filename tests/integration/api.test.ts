@@ -36,6 +36,10 @@ describe('API Integration Tests', () => {
     const res = await fetch(`${API_URL}/api/admin_signout_all`, { method: 'OPTIONS' });
     expect([200, 204, 401, 405]).toContain(res.status);
   });
+  it('audit should respond', async () => {
+    const res = await fetch(`${API_URL}/api/audit`, { method: 'OPTIONS' });
+    expect([200, 204, 401, 405]).toContain(res.status);
+  });
   it('auto_configure_coolify_app should respond', async () => {
     const res = await fetch(`${API_URL}/api/auto_configure_coolify_app`, { method: 'OPTIONS' });
     expect([200, 204, 401, 405]).toContain(res.status);
@@ -46,10 +50,6 @@ describe('API Integration Tests', () => {
   });
   it('auto_restart_container should respond', async () => {
     const res = await fetch(`${API_URL}/api/auto_restart_container`, { method: 'OPTIONS' });
-    expect([200, 204, 401, 405]).toContain(res.status);
-  });
-  it('check_deployment_status should respond', async () => {
-    const res = await fetch(`${API_URL}/api/check_deployment_status`, { method: 'OPTIONS' });
     expect([200, 204, 401, 405]).toContain(res.status);
   });
 });

@@ -37,13 +37,13 @@ Pour exécuter l'audit avant chaque build, ajoutez dans votre `package.json`:
 ### Ce qui est vérifié
 
 1. **Patterns propriétaires** dans le code source:
-   - `data-lovable-id`, `data-bolt-id`, `data-v0-id`, etc.
-   - Imports `@lovable/*`, `@gptengineer/*`, `@bolt/*`, `@v0/*`
+   - `data-[PLATFORM]-id`, `data-bolt-id`, `data-v0-id`, etc.
+   - Imports `@[PLATFORM]/*`, `@[PLATFORM]/*`, `@bolt/*`, `@v0/*`
    - Commentaires de balisage IDE
 
 2. **Dépendances package.json**:
-   - `lovable-tagger`
-   - `@lovable/core`, `@lovable/cli`, `@lovable/ui`
+   - `[PLATFORM]-tagger`
+   - `@[PLATFORM]/core`, `@[PLATFORM]/cli`, `@[PLATFORM]/ui`
    - Autres packages propriétaires
 
 3. **Configuration Vite**:

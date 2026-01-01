@@ -29,7 +29,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <Suspense fallback={<div className="flex items-center justify-center h-screen">Chargement...</div>}>
+  <Suspense fallback={<div className="flex items-center justify-center h-screen"><div className="h-8 w-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
@@ -54,6 +54,8 @@ const App = () => (
             <Route path="/rapport-liberation/:deploymentId" element={<LiberationReport />} />
             <Route path="/widget" element={<Widget />} />
             <Route path="/agence" element={<AgencyDashboard />} />
+            {/* /liberate redirige vers le dashboard avec l'onglet liberation */}
+            <Route path="/liberate" element={<Dashboard />} />
             <Route path="/services" element={<Pricing />} />
             <Route path="/legal/terms" element={<Terms />} />
             <Route path="/legal/privacy" element={<Privacy />} />

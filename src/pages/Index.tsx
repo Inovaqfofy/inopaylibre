@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import FofyChat from "@/components/FofyChat";
 
 // Import platform logos
-import lovableLogo from "@/assets/platforms/lovable-logo.png";
+import lovableLogo from "@/assets/platforms/[PLATFORM]-logo.png";
 import boltLogo from "@/assets/platforms/bolt-logo.png";
 import v0Logo from "@/assets/platforms/v0-logo.jpg";
 import cursorLogo from "@/assets/platforms/cursor-logo.jpg";
@@ -24,7 +24,7 @@ const Index = () => {
   const mousePosition = useMouseParallax(15);
 
   const platforms = [
-    { name: "Lovable", logo: lovableLogo },
+    { name: "[PLATFORM]", logo: lovableLogo },
     { name: "Bolt", logo: boltLogo },
     { name: "v0", logo: v0Logo },
     { name: "Cursor", logo: cursorLogo },

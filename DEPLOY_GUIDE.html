@@ -26,7 +26,7 @@
     header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
     header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; position: relative; }
     header p { opacity: 0.9; font-size: 1.1rem; position: relative; }
-    .sovereignty-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #f59e0b15; border: 2px solid #f59e0b; border-radius: 2rem; font-weight: 700; font-size: 1.1rem; color: #f59e0b; margin-top: 1.5rem; position: relative; backdrop-filter: blur(8px); }
+    .sovereignty-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #22c55e15; border: 2px solid #22c55e; border-radius: 2rem; font-weight: 700; font-size: 1.1rem; color: #22c55e; margin-top: 1.5rem; position: relative; backdrop-filter: blur(8px); }
     
     nav { background: var(--bg-card); border-radius: 1rem; padding: 1rem; margin-bottom: 2rem; border: 1px solid var(--border); position: sticky; top: 1rem; z-index: 100; }
     nav ul { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; justify-content: center; }
@@ -94,7 +94,7 @@
     <header>
       <h1>🚀 inopay</h1>
       <p>Guide de déploiement autonome complet</p>
-      <div class="sovereignty-badge">⚠️ Score de Souveraineté: 85%</div>
+      <div class="sovereignty-badge">✅ Score de Souveraineté: 95%</div>
     </header>
     
     <nav>
@@ -784,6 +784,16 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>VITE_AI_BASE_URL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_AI_MODEL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>VITE_SELF_SUPABASE_URL</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -879,11 +889,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>VITE_AI_BASE_URL</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
               <td><code>VITE_OLLAMA_MODEL</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -940,6 +945,46 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>functionName</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_AI_URL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>pkg</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>imports</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>newPkg</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>varName</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>AI_URL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_LOVABLE_</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_APP_</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1014,11 +1059,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>pkg</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
               <td><code>OLLAMA_BASE_URL</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -1055,11 +1095,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>route</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>VITE_LOVABLE_</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1184,6 +1219,56 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>file</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>type</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>quote</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>prompt</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>schemaName</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>patternName</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>importPattern</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>icon</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_APP_CONFIG</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>line</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>text</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -1239,6 +1324,11 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>dir</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>importPath</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -1265,6 +1355,51 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>elapsed</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>CORS_ORIGIN</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>LOG_LEVEL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>AI_BASE_URL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>AI_MODEL</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>AI_API_KEY</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_APP_NAME</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>message</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>timestamp</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>provider</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1299,11 +1434,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>CORS_ORIGIN</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
               <td><code>JWT_EXPIRY</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -1330,6 +1460,31 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>skipped</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>errorText</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>baseUrl</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_AI_PROVIDER</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_AI_API_KEY</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>VITE_AI_EMBEDDING_MODEL</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1364,7 +1519,17 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>VITE_</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>version</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>rootPrefix</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1395,6 +1560,16 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>identifier</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>ipAddress</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>reason</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1434,12 +1609,12 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>errorText</code></td>
+              <td><code>signedOutCount</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>signedOutCount</code></td>
+              <td><code>jobId</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -1969,6 +2144,16 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>CURRENT_DATE</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>userInfo</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>projectId</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -1980,146 +2165,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>storagePath</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>VITE_AUTH_URL</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>MEILISEARCH_MASTER_KEY</code></td>
-              <td>Clé master Meilisearch</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>MINIO_ACCESS_KEY</code></td>
-              <td>Access key MinIO</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>MINIO_SECRET_KEY</code></td>
-              <td>Secret key MinIO</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>OLLAMA_URL</code></td>
-              <td>URL Ollama local</td>
-              <td>❌</td>
-              <td><code>http://ollama:11434</code></td>
-            </tr><tr>
-              <td><code>OLLAMA_MODEL</code></td>
-              <td>Modèle Ollama</td>
-              <td>❌</td>
-              <td><code>llama2</code></td>
-            </tr><tr>
-              <td><code>OPENROUTER_MODEL</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>OPENAI_MODEL</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>AI_PROVIDER</code></td>
-              <td>Provider IA (ollama/openai/openrouter)</td>
-              <td>❌</td>
-              <td><code>ollama</code></td>
-            </tr><tr>
-              <td><code>GITHUB_WEBHOOK_SECRET</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>npm_package_version</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>VITE_SUPABASE_PROJECT_ID</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>baseUrl</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>policyName</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>policyBody</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>icon</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>scoreColor</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>scoreEmoji</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>sovereigntyScore</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>fileCount</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>totalServerChanges</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>clientSovereigntyScore</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>assetCount</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>assetPath</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>sqlInserts</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>exportError</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>tablesListMd</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>warningsListMd</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -2299,6 +2344,11 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>VITE_SUPABASE_PROJECT_ID</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>baseSha</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -2365,11 +2415,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td><code>-</code></td>
             </tr><tr>
               <td><code>location</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>ipAddress</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -2649,11 +2694,6 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>provider</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
               <td><code>coolify_url</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -2704,12 +2744,57 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>userAgent</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>remotePath</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
               <td><code>customerId</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>number</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>total</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>horizontal</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>bar</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>outputPath</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>absolutePath</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>projectPath</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>duration</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -2749,6 +2834,26 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>DOMAIN</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>MINIO_PASSWORD</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>INSTALL_DIR</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>SERVER_IP</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>TOTAL_RAM</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
@@ -2764,7 +2869,27 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>MINIO_ACCESS_KEY</code></td>
+              <td>Access key MinIO</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>MINIO_SECRET_KEY</code></td>
+              <td>Secret key MinIO</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>MEILISEARCH_API_KEY</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>SCORE</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
+              <td><code>BOUNCER_KEY</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
@@ -2774,17 +2899,17 @@ nano .env</code><button class="copy-btn" onclick="copyCode(this)">Copier</button
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
+              <td><code>scoreColor</code></td>
+              <td>Variable personnalisée</td>
+              <td>❌</td>
+              <td><code>-</code></td>
+            </tr><tr>
               <td><code>MIN_SCORE</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>
             </tr><tr>
-              <td><code>file</code></td>
-              <td>Variable personnalisée</td>
-              <td>❌</td>
-              <td><code>-</code></td>
-            </tr><tr>
-              <td><code>dir</code></td>
+              <td><code>fileCount</code></td>
               <td>Variable personnalisée</td>
               <td>❌</td>
               <td><code>-</code></td>

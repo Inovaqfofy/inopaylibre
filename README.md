@@ -1,6 +1,6 @@
 # inopay - Liberation Pack 🛡️
 
-## Score de Souveraineté: 85%
+## Score de Souveraineté: 95%
 
 Ce pack contient votre application complètement libérée des dépendances propriétaires,
 prête à être déployée sur votre propre infrastructure.

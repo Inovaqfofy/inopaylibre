@@ -30,8 +30,7 @@ import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 interface SovereignCredentials {
-  // GitHub SOURCE (Lovable)
-  github_source_url: string;
+    github_source_url: string;
   github_source_token: string;
   // GitHub DESTINATION (Personnel)
   github_destination_token: string;
@@ -438,7 +437,7 @@ export function SovereignConnections() {
             <Input
               id="github-source-url"
               type="url"
-              placeholder="https://github.com/lovable-org/mon-projet"
+              placeholder="https://github.com/[PLATFORM]-org/mon-projet"
               value={credentials.github_source_url}
               onChange={(e) => setCredentials(prev => ({ ...prev, github_source_url: e.target.value }))}
             />

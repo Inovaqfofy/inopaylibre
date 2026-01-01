@@ -1,6 +1,6 @@
 # 🚀 Guide de Migration vers l'Autonomie Totale
 
-Ce guide vous permettra de migrer Inopay de Lovable Cloud vers votre propre infrastructure.
+Ce guide vous permettra de migrer Inopay de [PLATFORM] Cloud vers votre propre infrastructure.
 
 ## 📋 Prérequis
 
@@ -234,7 +234,7 @@ COPY user_settings FROM '/path/to/user_settings.csv' WITH CSV HEADER;
 
 ```bash
 # Cloner depuis Lovable
-git clone https://github.com/lovable-xyz/[VOTRE_PROJET].git inopay
+git clone https://github.com/[PLATFORM]-xyz/[VOTRE_PROJET].git inopay
 
 # Changer le remote
 cd inopay
