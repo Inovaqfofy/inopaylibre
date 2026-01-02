@@ -1,0 +1,50 @@
+# Domaine principal - Frontend
+getinopay.com, www.getinopay.com {
+    reverse_proxy inopay-frontend:80
+    
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+        -Server
+    }
+    encode gzip zstd
+}
+
+# API Supabase
+api.getinopay.com {
+    # REST API
+    handle /rest/v1/* {
+        reverse_proxy supabase-kong:8000
+    }
+    
+    # Auth
+    handle /auth/v1/* {
+        reverse_proxy supabase-kong:8000
+    }
+    
+    # Storage
+    handle /storage/v1/* {
+        reverse_proxy supabase-kong:8000
+    }
+    
+    # Realtime
+    handle /realtime/v1/* {
+        reverse_proxy supabase-kong:8000
+    }
+    
+    # Edge Functions
+    handle /functions/v1/* {
+        reverse_proxy supabase-kong:8000
+    }
+    
+    # Default
+    handle /* {
+        reverse_proxy supabase-kong:8000
+    }
+}
+
+# Base de données (accès restreint)
+db.getinopay.com {
+    # Supabase Studio (optionnel - sécuriser avec auth)
+    reverse_proxy supabase-studio:3000
+}
